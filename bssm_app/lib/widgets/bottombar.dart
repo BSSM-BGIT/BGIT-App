@@ -8,9 +8,9 @@ class Bottom {
     return SizedBox(
       height: 60.h,
       child: Material(
-        color: Colors.transparent,
+        color: Colors.white,
         child: TabBar(
-          labelColor: CommonColor.commitText,
+          labelColor: CommonColor.purple1,
           unselectedLabelColor: Colors.black,
           indicatorColor: Colors.transparent,
           tabs: [
@@ -32,7 +32,6 @@ class Bottom {
                 size: 25.h,
               ),
             ),
-            
           ],
         ),
       ),
