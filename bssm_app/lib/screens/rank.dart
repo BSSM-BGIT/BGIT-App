@@ -10,9 +10,32 @@ class Rank extends StatefulWidget {
 }
 
 class _RankState extends State<Rank> {
-  int rank = 6;
-  int mycommit = 4422;
+  int myRank = 6;
+  int myCommit = 4422;
   String name = "Lovingcats";
+
+  int rank = 1;
+  late int rankColor;
+
+  int colorSelect() {
+    int rankColor;
+    if (rank == 1) {
+      rankColor = 0xffFF3B5A;
+    } else if (rank == 2) {
+      rankColor = 0xffFF6A00;
+    } else if (rank == 3) {
+      rankColor = 0xffE6DA44;
+    } else {
+      rankColor = 0xffFFFFFFF;
+    }
+    return rankColor;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    rankColor = colorSelect();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +66,7 @@ class _RankState extends State<Rank> {
         children: [
           Container(
             width: double.infinity,
-            height: 180.h,
+            height: 140.h,
             color: CommonColor.purple1,
             child: Row(
               children: [
@@ -69,7 +92,7 @@ class _RankState extends State<Rank> {
                             fontWeight: FontWeight.w500),
                       ),
                       Text(
-                        "${mycommit}",
+                        "${myCommit}",
                         style: TextStyle(
                             fontSize: 35.sp,
                             color: Colors.white,
@@ -82,7 +105,7 @@ class _RankState extends State<Rank> {
                   width: 120.w,
                 ),
                 Text(
-                  "No.${rank}",
+                  "No.${myRank}",
                   style: TextStyle(
                       fontSize: 40.sp,
                       fontWeight: FontWeight.w500,
@@ -91,10 +114,97 @@ class _RankState extends State<Rank> {
               ],
             ),
           ),
-          Container(
-            height: 420.h,
-            width: double.infinity,
-            color: CommonColor.purple2,
+          Stack(
+            children: [
+              Container(
+                height: 521.4.h,
+                width: double.infinity,
+                color: CommonColor.purple2,
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 15.w, right: 15.w, top: 20.h),
+                child: Container(
+                  width: double.infinity,
+                  height: 80.h,
+                  decoration: BoxDecoration(
+                      color: CommonColor.purple1,
+                      borderRadius: BorderRadius.all(Radius.circular(20.r))),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                          padding: EdgeInsets.only(
+                              left: 23.w, right: 23.w, top: 10.h, bottom: 10.h),
+                          child: Text(
+                            "$rank",
+                            style: TextStyle(
+                                color: Color(rankColor), fontSize: 50.sp),
+                          )),
+                      Container(
+                          height: 80.h, width: 2.w, color: CommonColor.purple2),
+                      SizedBox(
+                        width: 12.w,
+                      ),
+                      Container(
+                        height: 50.h,
+                        width: 60.w,
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(50.r)),
+                            color: Colors.black),
+                      ),
+                      SizedBox(
+                        width: 5.w,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 4.h, top: 8.h),
+                            child: Text(
+                              "UserName",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          Text(
+                            "Name",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 42.w, right: 2.w),
+                        child: const Icon(
+                          Icons.check_circle_outline,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Container(
+                        width: 60.w,
+                        child: FittedBox(
+                          fit: BoxFit.fitHeight,
+                          child: Text(
+                            "11577",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 60000.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
+            ],
           )
         ],
       ),
