@@ -3,12 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(MyApp());
+} 
+
+
+
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
 }
 
-class MyApp extends StatelessWidget {
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
@@ -18,7 +28,6 @@ class MyApp extends StatelessWidget {
         builder: (BuildContext context, Widget? child) => const MaterialApp(
             title: 'BSSM_Git',
             debugShowCheckedModeBanner: false,
-            home: DefaultTabController(
-                length: 3, child: Scaffold(body: Rank()))));
+            home: Rank()));
   }
 }
