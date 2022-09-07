@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 class CommonColor {
-  static Color purple1 = const Color(0xFF343876);
-  static Color purple4 = const Color(0xff3A367B);
-  static Color purple2 = const Color(0xFF1A1B69);
-  static Color purple3 = const Color(0xFF566383);
+  static Color gray = const Color(0xFFF0F0F0);
+  static Color blue = const Color(0xff527CDB);
 }
