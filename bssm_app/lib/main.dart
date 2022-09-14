@@ -1,6 +1,6 @@
-import 'package:bssm_app/screens/community.dart';
-import 'package:bssm_app/screens/rank.dart';
-import 'package:bssm_app/screens/user.dart';
+import 'package:bssm_app/screens/bottombar/community.dart';
+import 'package:bssm_app/screens/bottombar/rank.dart';
+import 'package:bssm_app/screens/bottombar/user.dart';
 import 'package:bssm_app/widgets/bottombar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
