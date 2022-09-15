@@ -1,6 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:bssm_app/common/common.dart';
-import 'package:bssm_app/widgets/rank_view.dart';
+import 'package:bssm_app/widgets/github_rank_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:material_dialogs/material_dialogs.dart';
@@ -127,9 +127,13 @@ class _RankState extends State<Rank> {
           ),
           actions: [
             Padding(
-              padding: EdgeInsets.only(top: 17.h, right: 20.w, bottom: 3.h),
+              padding: EdgeInsets.only(top: 15.h, right: 20.w, bottom: 3.h),
               child: Badge(
-                badgeContent: const Text("!"),
+                badgeContent: const Text(
+                  "!",
+                  style: TextStyle(color: Colors.white),
+                ),
+                badgeColor: CommonColor.blue,
                 child: InkWell(
                     onTap: () {
                       showDialog();
@@ -167,8 +171,13 @@ class _RankState extends State<Rank> {
         child: Center(
           child: Column(
             children: [
+              Container(
+                height: 1.h,
+                width: double.infinity,
+                decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
+              ),
               Padding(
-                padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 30.h),
+                padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 50.h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -178,9 +187,18 @@ class _RankState extends State<Rank> {
                         height: 140.h,
                         width: 110.w,
                         decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.2),
+                                spreadRadius: 0,
+                                blurRadius: 5.0,
+                                offset: Offset(
+                                    0, 2.h), // changes position of shadow
+                              ),
+                            ],
                             color: Colors.white,
                             borderRadius:
-                                BorderRadius.all(Radius.circular(15.r))),
+                                BorderRadius.all(Radius.circular(5.r))),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -194,16 +212,18 @@ class _RankState extends State<Rank> {
                             Text(
                               "username",
                               style: TextStyle(
-                                  fontSize: 18.sp,
-                                  color: CommonColor.blue,
-                                  fontWeight: FontWeight.w500),
+                                fontFamily: "Roboto",
+                                fontSize: 14.sp,
+                                color: CommonColor.blue,
+                              ),
                             ),
                             Text(
                               "name",
                               style: TextStyle(
-                                  fontSize: 17.sp,
-                                  color: Colors.grey.withOpacity(0.6),
-                                  fontWeight: FontWeight.w500),
+                                fontFamily: "Roboto",
+                                fontSize: 15.sp,
+                                color: Colors.grey.withOpacity(0.8),
+                              ),
                             ),
                             SizedBox(
                               height: 9.h,
@@ -211,9 +231,10 @@ class _RankState extends State<Rank> {
                             Text(
                               "9,900",
                               style: TextStyle(
-                                  fontSize: 17.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500),
+                                fontFamily: "Roboto",
+                                fontSize: 15.sp,
+                                color: Colors.black,
+                              ),
                             ),
                           ],
                         ),
@@ -221,16 +242,24 @@ class _RankState extends State<Rank> {
                     ),
                     Container(
                       height: 170.h,
-                      width: 140.w,
+                      width: 120.w,
                       decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.4),
+                              spreadRadius: 0,
+                              blurRadius: 5.0,
+                              offset:
+                                  Offset(0, 3.h), // changes position of shadow
+                            ),
+                          ],
                           color: Colors.white,
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(15.r))),
+                          borderRadius: BorderRadius.all(Radius.circular(5.r))),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(top: 14.h, bottom: 10.h),
+                            margin: EdgeInsets.only(top: 20.h, bottom: 10.h),
                             height: 50.h,
                             width: 50.w,
                             decoration: const BoxDecoration(
@@ -239,16 +268,18 @@ class _RankState extends State<Rank> {
                           Text(
                             "username",
                             style: TextStyle(
-                                fontSize: 19.sp,
-                                color: CommonColor.blue,
-                                fontWeight: FontWeight.w500),
+                              fontFamily: "Roboto",
+                              fontSize: 16.sp,
+                              color: CommonColor.blue,
+                            ),
                           ),
                           Text(
                             "name",
                             style: TextStyle(
-                                fontSize: 18.sp,
-                                color: Colors.grey.withOpacity(0.6),
-                                fontWeight: FontWeight.w500),
+                              fontFamily: "Roboto",
+                              fontSize: 15.sp,
+                              color: Colors.grey.withOpacity(0.8),
+                            ),
                           ),
                           SizedBox(
                             height: 15.h,
@@ -256,9 +287,10 @@ class _RankState extends State<Rank> {
                           Text(
                             "10,000",
                             style: TextStyle(
-                                fontSize: 18.sp,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500),
+                              fontSize: 15.sp,
+                              color: Colors.black,
+                              fontFamily: "Roboto",
+                            ),
                           ),
                         ],
                       ),
@@ -269,9 +301,18 @@ class _RankState extends State<Rank> {
                         height: 140.h,
                         width: 110.w,
                         decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.2),
+                                spreadRadius: 0,
+                                blurRadius: 5.0,
+                                offset: Offset(
+                                    0, 2.h), // changes position of shadow
+                              ),
+                            ],
                             color: Colors.white,
                             borderRadius:
-                                BorderRadius.all(Radius.circular(15.r))),
+                                BorderRadius.all(Radius.circular(5.r))),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -285,16 +326,18 @@ class _RankState extends State<Rank> {
                             Text(
                               "username",
                               style: TextStyle(
-                                  fontSize: 18.sp,
-                                  color: CommonColor.blue,
-                                  fontWeight: FontWeight.w500),
+                                fontSize: 14.sp,
+                                color: CommonColor.blue,
+                                fontFamily: "Roboto",
+                              ),
                             ),
                             Text(
                               "name",
                               style: TextStyle(
-                                  fontSize: 17.sp,
-                                  color: Colors.grey.withOpacity(0.6),
-                                  fontWeight: FontWeight.w500),
+                                fontSize: 15.sp,
+                                color: Colors.grey.withOpacity(0.8),
+                                fontFamily: "Roboto",
+                              ),
                             ),
                             SizedBox(
                               height: 9.h,
@@ -302,9 +345,10 @@ class _RankState extends State<Rank> {
                             Text(
                               "9,800",
                               style: TextStyle(
-                                  fontSize: 17.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500),
+                                fontSize: 15.sp,
+                                color: Colors.black,
+                                fontFamily: "Roboto",
+                              ),
                             ),
                           ],
                         ),
@@ -323,7 +367,7 @@ class _RankState extends State<Rank> {
                       "My Rank",
                       style: TextStyle(
                           fontSize: 18.sp,
-                          fontWeight: FontWeight.w500,
+                          fontFamily: "Roboto",
                           color: Colors.black),
                     ),
                     SizedBox(
@@ -333,7 +377,7 @@ class _RankState extends State<Rank> {
                       "NO.$myRank",
                       style: TextStyle(
                           fontSize: 23.sp,
-                          fontWeight: FontWeight.w500,
+                          fontFamily: "Roboto",
                           color: CommonColor.blue),
                     )
                   ],
@@ -355,16 +399,18 @@ class _RankState extends State<Rank> {
                         Text(
                           "Rank",
                           style: TextStyle(
-                              fontSize: 15.sp,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500),
+                            fontSize: 15.sp,
+                            color: Colors.white,
+                            fontFamily: "Roboto",
+                          ),
                         ),
                         Text(
                           "User",
                           style: TextStyle(
-                              fontSize: 15.sp,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500),
+                            fontSize: 15.sp,
+                            color: Colors.white,
+                            fontFamily: "Roboto",
+                          ),
                         ),
                         SizedBox(
                           width: 15.w,
@@ -372,9 +418,10 @@ class _RankState extends State<Rank> {
                         Text(
                           "Commit",
                           style: TextStyle(
-                              fontSize: 15.sp,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500),
+                            fontSize: 15.sp,
+                            color: Colors.white,
+                            fontFamily: "Roboto",
+                          ),
                         ),
                       ],
                     ),
