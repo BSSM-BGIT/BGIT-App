@@ -1,8 +1,5 @@
-import 'package:bssm_app/screens/bottombar/community.dart';
+import 'package:bssm_app/screens/bottombar/bottom.dart';
 import 'package:bssm_app/screens/bottombar/rank.dart';
-import 'package:bssm_app/screens/bottombar/user.dart';
-import 'package:bssm_app/widgets/bottombar.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,15 +26,7 @@ class _MyAppState extends State<MyApp> {
       builder: (BuildContext context, Widget? child) => const MaterialApp(
         title: 'BSSM_Git',
         debugShowCheckedModeBanner: false,
-        home: Rank()
-        // DefaultTabController(
-        //     length: 3,
-        //     child: Scaffold(
-        //         body: const TabBarView(
-        //           physics: NeverScrollableScrollPhysics(),
-        //           children: [Rank(), Community(), User()],
-        //         ),
-        //         bottomNavigationBar: Bottom.bottomBar())),
+        home: HomePage()
       ),
     );
   }
