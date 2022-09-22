@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:bssm_app/common/common.dart';
+import 'package:bssm_app/widgets/baekjoon_rank_view.dart';
 import 'package:bssm_app/widgets/github_rank_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +17,13 @@ class Rank extends StatefulWidget {
 
 class _RankState extends State<Rank> {
   int myRank = 8;
+  bool ispressed1 = true;
+  bool ispressed2 = false;
+  int textSize1 = 24;
+  int textSize2 = 18;
+  int leftPadding = 40;
+  double opacity1 = 1;
+  double opacity2 = 0;
 
   @override
   void initState() {
@@ -82,7 +90,7 @@ class _RankState extends State<Rank> {
             Navigator.push(
                 context, MaterialPageRoute(builder: (_) => const Webview()));
           },
-          style: ElevatedButton.styleFrom(primary: Colors.blue),
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
           child: Padding(
             padding: EdgeInsets.only(left: 10.w, right: 10.w),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -141,18 +149,6 @@ class _RankState extends State<Rank> {
                     child: Image.asset("images/github.png")),
               ),
             ),
-            // ElevatedButton(
-            //     onPressed: () {
-            //       showDialog();
-            //     },
-            //     style: ElevatedButton.styleFrom(),
-            //     child: Text(
-            //       "등록",
-            //       style: TextStyle(
-            //           fontSize: 18.sp,
-            //           color: Colors.white,
-            //           fontWeight: FontWeight.w500),
-            //     ))
           ],
           title: Padding(
             padding: EdgeInsets.only(top: 16.h),
@@ -171,264 +167,98 @@ class _RankState extends State<Rank> {
         child: Center(
           child: Column(
             children: [
-              Container(
-                height: 1.h,
-                width: double.infinity,
-                decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
-              ),
               Padding(
-                padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 50.h),
+                padding: EdgeInsets.only(left: 80.w, right: 80.w),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(top: 35.h),
-                      child: Container(
-                        height: 140.h,
-                        width: 110.w,
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.2),
-                                spreadRadius: 0,
-                                blurRadius: 5.0,
-                                offset: Offset(
-                                    0, 2.h), // changes position of shadow
-                              ),
-                            ],
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(5.r))),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(top: 10.h, bottom: 3.h),
-                              height: 50.h,
-                              width: 50.w,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle, color: Colors.black),
-                            ),
-                            Text(
-                              "username",
-                              style: TextStyle(
-                                fontFamily: "Roboto",
-                                fontSize: 14.sp,
-                                color: CommonColor.blue,
-                              ),
-                            ),
-                            Text(
-                              "name",
-                              style: TextStyle(
-                                fontFamily: "Roboto",
-                                fontSize: 15.sp,
-                                color: Colors.grey.withOpacity(0.8),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 9.h,
-                            ),
-                            Text(
-                              "9,900",
-                              style: TextStyle(
-                                fontFamily: "Roboto",
-                                fontSize: 15.sp,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
+                    ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            ispressed1 = true;
+                            ispressed2 = false;
+                            textSize1 = 24;
+                            textSize2 = 18;
+                            leftPadding = 40;
+                            opacity1 = 1;
+                            opacity2 = 0;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          elevation: 0.0,
                         ),
-                      ),
-                    ),
-                    Container(
-                      height: 170.h,
-                      width: 120.w,
-                      decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.4),
-                              spreadRadius: 0,
-                              blurRadius: 5.0,
-                              offset:
-                                  Offset(0, 3.h), // changes position of shadow
-                            ),
-                          ],
-                          color: Colors.white,
-                          borderRadius: BorderRadius.all(Radius.circular(5.r))),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(top: 20.h, bottom: 10.h),
-                            height: 50.h,
-                            width: 50.w,
-                            decoration: const BoxDecoration(
-                                shape: BoxShape.circle, color: Colors.black),
-                          ),
-                          Text(
-                            "username",
+                        child: Opacity(
+                          opacity: ispressed1 ? 1.0 : 0.3,
+                          child: Text(
+                            "백준",
                             style: TextStyle(
-                              fontFamily: "Roboto",
-                              fontSize: 16.sp,
-                              color: CommonColor.blue,
+                              color:
+                                  ispressed1 ? CommonColor.blue : Colors.black,
+                              fontSize: textSize1.sp,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
-                          Text(
-                            "name",
-                            style: TextStyle(
-                              fontFamily: "Roboto",
-                              fontSize: 15.sp,
-                              color: Colors.grey.withOpacity(0.8),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 15.h,
-                          ),
-                          Text(
-                            "10,000",
-                            style: TextStyle(
-                              fontSize: 15.sp,
-                              color: Colors.black,
-                              fontFamily: "Roboto",
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 35.h),
-                      child: Container(
-                        height: 140.h,
-                        width: 110.w,
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.2),
-                                spreadRadius: 0,
-                                blurRadius: 5.0,
-                                offset: Offset(
-                                    0, 2.h), // changes position of shadow
-                              ),
-                            ],
-                            color: Colors.white,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(5.r))),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(top: 10.h, bottom: 3.h),
-                              height: 50.h,
-                              width: 50.w,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle, color: Colors.black),
-                            ),
-                            Text(
-                              "username",
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                color: CommonColor.blue,
-                                fontFamily: "Roboto",
-                              ),
-                            ),
-                            Text(
-                              "name",
-                              style: TextStyle(
-                                fontSize: 15.sp,
-                                color: Colors.grey.withOpacity(0.8),
-                                fontFamily: "Roboto",
-                              ),
-                            ),
-                            SizedBox(
-                              height: 9.h,
-                            ),
-                            Text(
-                              "9,800",
-                              style: TextStyle(
-                                fontSize: 15.sp,
-                                color: Colors.black,
-                                fontFamily: "Roboto",
-                              ),
-                            ),
-                          ],
+                        )),
+                    ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            ispressed2 = true;
+                            ispressed1 = false;
+                            textSize2 = 24;
+                            textSize1 = 18;
+                            leftPadding = 205;
+                            opacity1 = 0;
+                            opacity2 = 1;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          elevation: 0.0,
                         ),
-                      ),
-                    ),
+                        child: Opacity(
+                          opacity: ispressed2 ? 1.0 : 0.3,
+                          child: Text(
+                            "깃허브",
+                            style: TextStyle(
+                                color: ispressed2
+                                    ? CommonColor.blue
+                                    : Colors.black,
+                                fontSize: textSize2.sp,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        )),
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 20.h, left: 22.w, bottom: 15.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      "My Rank",
-                      style: TextStyle(
-                          fontSize: 18.sp,
-                          fontFamily: "Roboto",
-                          color: Colors.black),
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Text(
-                      "NO.$myRank",
-                      style: TextStyle(
-                          fontSize: 23.sp,
-                          fontFamily: "Roboto",
-                          color: CommonColor.blue),
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(left: 20.w, right: 20.w),
-                child: Container(
-                  width: double.infinity,
-                  height: 38.h,
-                  decoration: BoxDecoration(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  AnimatedPadding(
+                    duration: const Duration(microseconds: 100000),
+                    padding: EdgeInsets.only(left: leftPadding.w),
+                    child: Container(
+                      width: 160.w,
+                      height: 1.h,
                       color: CommonColor.blue,
-                      borderRadius: BorderRadius.all(Radius.circular(7.r))),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10.w, right: 37.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Rank",
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            color: Colors.white,
-                            fontFamily: "Roboto",
-                          ),
-                        ),
-                        Text(
-                          "User",
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            color: Colors.white,
-                            fontFamily: "Roboto",
-                          ),
-                        ),
-                        SizedBox(
-                          width: 15.w,
-                        ),
-                        Text(
-                          "Commit",
-                          style: TextStyle(
-                            fontSize: 15.sp,
-                            color: Colors.white,
-                            fontFamily: "Roboto",
-                          ),
-                        ),
-                      ],
                     ),
                   ),
-                ),
+                ],
               ),
-              Rankview(myRank: myRank)
+              Stack(
+                children: [
+                  AnimatedOpacity(
+                    opacity: opacity1,
+                    duration: const Duration(microseconds: 1000000),
+                    child: BaekRank(myRank: myRank),
+                  ),
+                  AnimatedOpacity(
+                    opacity: opacity2,
+                    duration: const Duration(microseconds: 1000000),
+                    child: GithubRank(myRank: myRank),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
