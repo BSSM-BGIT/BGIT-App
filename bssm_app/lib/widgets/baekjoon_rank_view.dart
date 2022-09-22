@@ -330,10 +330,9 @@ List<Widget> makeRankList(
               child: Row(
                 children: [
                   Padding(
-                      padding:
-                          EdgeInsets.only(left: 23.w, top: 8.h, bottom: 10.h),
+                      padding: EdgeInsets.only(left: 23.w, bottom: 14.h),
                       child: SizedBox(
-                        width: 65.w,
+                        width: 40.w,
                         child: Text(
                           "${ranks[i].rank}",
                           style: TextStyle(
@@ -352,7 +351,7 @@ List<Widget> makeRankList(
                   Padding(
                     padding: EdgeInsets.only(bottom: 5.h),
                     child: SizedBox(
-                      width: 150.w,
+                      width: 160.w,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
