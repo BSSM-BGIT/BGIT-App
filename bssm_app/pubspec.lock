@@ -123,6 +123,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_web_auth:
+    dependency: "direct main"
+    description:
+      name: flutter_web_auth
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.1"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -142,6 +149,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.15.0"
+  http:
+    dependency: "direct main"
+    description:
+      name: http
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.13.5"
+  http_parser:
+    dependency: transitive
+    description:
+      name: http_parser
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.1"
   image:
     dependency: transitive
     description:
@@ -233,6 +254,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+  salomon_bottom_bar:
+    dependency: "direct main"
+    description:
+      name: salomon_bottom_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.3.1"
   sky_engine:
     dependency: transitive
     description: flutter
