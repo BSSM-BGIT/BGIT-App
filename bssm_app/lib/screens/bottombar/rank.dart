@@ -8,6 +8,7 @@ import 'package:material_dialogs/material_dialogs.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:bssm_app/screens/webview.dart';
 
+
 class Rank extends StatefulWidget {
   const Rank({Key? key}) : super(key: key);
 
@@ -180,34 +181,6 @@ class _RankState extends State<Rank> {
                             textSize1 = 24;
                             textSize2 = 18;
                             leftPadding = 40;
-                            opacity1 = 1;
-                            opacity2 = 0;
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          elevation: 0.0,
-                        ),
-                        child: Opacity(
-                          opacity: ispressed1 ? 1.0 : 0.3,
-                          child: Text(
-                            "백준",
-                            style: TextStyle(
-                              color:
-                                  ispressed1 ? CommonColor.blue : Colors.black,
-                              fontSize: textSize1.sp,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        )),
-                    ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            ispressed2 = true;
-                            ispressed1 = false;
-                            textSize2 = 24;
-                            textSize1 = 18;
-                            leftPadding = 205;
                             opacity1 = 0;
                             opacity2 = 1;
                           });
@@ -217,15 +190,43 @@ class _RankState extends State<Rank> {
                           elevation: 0.0,
                         ),
                         child: Opacity(
-                          opacity: ispressed2 ? 1.0 : 0.3,
+                          opacity: ispressed1 ? 1.0 : 0.3,
                           child: Text(
                             "깃허브",
                             style: TextStyle(
-                                color: ispressed2
+                                color: ispressed1
                                     ? CommonColor.blue
                                     : Colors.black,
-                                fontSize: textSize2.sp,
+                                fontSize: textSize1.sp,
                                 fontWeight: FontWeight.w500),
+                          ),
+                        )),
+                    ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            ispressed2 = true;
+                            ispressed1 = false;
+                            textSize2 = 24;
+                            textSize1 = 18;
+                            leftPadding = 210;
+                            opacity1 = 1;
+                            opacity2 = 0;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          elevation: 0.0,
+                        ),
+                        child: Opacity(
+                          opacity: ispressed2 ? 1.0 : 0.3,
+                          child: Text(
+                            "백준",
+                            style: TextStyle(
+                              color:
+                                  ispressed2 ? CommonColor.blue : Colors.black,
+                              fontSize: textSize2.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         )),
                   ],
