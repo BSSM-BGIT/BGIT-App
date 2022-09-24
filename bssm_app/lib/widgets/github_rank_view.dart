@@ -68,7 +68,7 @@ class _RankviewState extends State<GithubRank> {
                               shape: BoxShape.circle, color: Colors.black),
                         ),
                         Text(
-                          "username",
+                          ranks[1].userName,
                           style: TextStyle(
                             fontFamily: "Roboto",
                             fontSize: 14.sp,
@@ -76,7 +76,7 @@ class _RankviewState extends State<GithubRank> {
                           ),
                         ),
                         Text(
-                          "name",
+                          ranks[1].name,
                           style: TextStyle(
                             fontFamily: "Roboto",
                             fontSize: 15.sp,
@@ -87,7 +87,7 @@ class _RankviewState extends State<GithubRank> {
                           height: 9.h,
                         ),
                         Text(
-                          "9,900",
+                          "${ranks[1].commit}",
                           style: TextStyle(
                             fontFamily: "Roboto",
                             fontSize: 15.sp,
@@ -123,7 +123,7 @@ class _RankviewState extends State<GithubRank> {
                             shape: BoxShape.circle, color: Colors.black),
                       ),
                       Text(
-                        "username",
+                        ranks[0].userName,
                         style: TextStyle(
                           fontFamily: "Roboto",
                           fontSize: 16.sp,
@@ -131,7 +131,7 @@ class _RankviewState extends State<GithubRank> {
                         ),
                       ),
                       Text(
-                        "name",
+                        ranks[0].name,
                         style: TextStyle(
                           fontFamily: "Roboto",
                           fontSize: 15.sp,
@@ -142,7 +142,7 @@ class _RankviewState extends State<GithubRank> {
                         height: 15.h,
                       ),
                       Text(
-                        "10,000",
+                        "${ranks[0].commit}",
                         style: TextStyle(
                           fontSize: 15.sp,
                           color: Colors.black,
@@ -180,7 +180,7 @@ class _RankviewState extends State<GithubRank> {
                               shape: BoxShape.circle, color: Colors.black),
                         ),
                         Text(
-                          "username",
+                          ranks[2].userName,
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: CommonColor.blue,
@@ -188,7 +188,7 @@ class _RankviewState extends State<GithubRank> {
                           ),
                         ),
                         Text(
-                          "name",
+                          ranks[2].name,
                           style: TextStyle(
                             fontSize: 15.sp,
                             color: Colors.grey.withOpacity(0.8),
@@ -199,7 +199,7 @@ class _RankviewState extends State<GithubRank> {
                           height: 9.h,
                         ),
                         Text(
-                          "9,800",
+                          "${ranks[2].commit}",
                           style: TextStyle(
                             fontSize: 15.sp,
                             color: Colors.black,
@@ -297,7 +297,7 @@ List<Widget> makeRankList(
     BuildContext context, List<GitRanklist> ranks, int myRank) {
   List<Widget> results = [];
 
-  for (var i = 0; i < ranks.length; i++) {
+  for (var i = 3; i < ranks.length; i++) {
     int rankcolor = colorSelect(ranks[i].rank);
     results.add(Padding(
       padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 13.h),
