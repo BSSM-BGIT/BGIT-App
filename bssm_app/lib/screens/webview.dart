@@ -80,7 +80,7 @@ class _WebviewState extends State<Webview> {
                 if (request.url.contains(url)) {
                   setState(() {
                     code = request.url.split("?code=")[1];
-                    _postRequest();
+                    
                     close = true;
                   });
                   // do not navigate
