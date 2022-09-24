@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:bssm_app/screens/webview.dart';
-
 
 class Rank extends StatefulWidget {
   const Rank({Key? key}) : super(key: key);
@@ -87,10 +85,7 @@ class _RankState extends State<Rank> {
           ),
         ),
         ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (_) => const Webview()));
-          },
+          onPressed: () {},
           style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
           child: Padding(
             padding: EdgeInsets.only(left: 10.w, right: 10.w),
@@ -115,152 +110,148 @@ class _RankState extends State<Rank> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: CommonColor.gray,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(70.h),
-        child: AppBar(
-          backgroundColor: CommonColor.gray,
-          leading: Padding(
-            padding: EdgeInsets.only(top: 15.h),
-            child: IconButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios,
-                color: Colors.black,
-              ),
-              iconSize: 25.h,
-            ),
-          ),
-          actions: [
-            Padding(
-              padding: EdgeInsets.only(top: 15.h, right: 20.w, bottom: 3.h),
-              child: Badge(
-                badgeContent: const Text(
-                  "!",
-                  style: TextStyle(color: Colors.white),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: CommonColor.gray,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(100.h),
+          child: AppBar(
+            toolbarHeight: 120.h,
+            backgroundColor: CommonColor.gray,
+            // leading: Padding(
+            //   padding: EdgeInsets.only(top: 15.h),
+            //   child: IconButton(
+            //     onPressed: () {
+            //       Navigator.of(context).pop();
+            //     },
+            //     icon: const Icon(
+            //       Icons.arrow_back_ios,
+            //       color: Colors.black,
+            //     ),
+            //     iconSize: 25.h,
+            //   ),
+            // ),
+            // actions: [
+            //   Padding(
+            //     padding: EdgeInsets.only(top: 15.h, right: 20.w, bottom: 3.h),
+            //     child: Badge(
+            //       badgeContent: const Text(
+            //         "!",
+            //         style: TextStyle(color: Colors.white),
+            //       ),
+            //       badgeColor: CommonColor.blue,
+            //       child: InkWell(
+            //           onTap: () {
+            //             showDialog();
+            //           },
+            //           child: Image.asset("images/github.png")),
+            //     ),
+            //   ),
+            // ],
+            title: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 16.h),
+                  child: Text(
+                    "LEADERBOARD",
+                    style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontSize: 22.sp,
+                        color: Colors.black),
+                  ),
                 ),
-                badgeColor: CommonColor.blue,
-                child: InkWell(
-                    onTap: () {
-                      showDialog();
-                    },
-                    child: Image.asset("images/github.png")),
-              ),
-            ),
-          ],
-          title: Padding(
-            padding: EdgeInsets.only(top: 16.h),
-            child: Text(
-              "LEADERBOARD",
-              style: TextStyle(
-                  fontFamily: 'Roboto', fontSize: 22.sp, color: Colors.black),
-            ),
-          ),
-          centerTitle: true,
-          elevation: 0.0,
-        ),
-      ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Center(
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.only(left: 80.w, right: 80.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            ispressed1 = true;
-                            ispressed2 = false;
-                            textSize1 = 24;
-                            textSize2 = 18;
-                            leftPadding = 40;
-                            opacity1 = 0;
-                            opacity2 = 1;
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          elevation: 0.0,
-                        ),
-                        child: Opacity(
-                          opacity: ispressed1 ? 1.0 : 0.3,
-                          child: Text(
-                            "깃허브",
-                            style: TextStyle(
-                                color: ispressed1
+                Padding(
+                  padding: EdgeInsets.only(left: 60.w, right: 60.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              ispressed1 = true;
+                              ispressed2 = false;
+                              textSize1 = 24;
+                              textSize2 = 18;
+                              leftPadding = 40;
+                              opacity1 = 0;
+                              opacity2 = 1;
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            elevation: 0.0,
+                          ),
+                          child: Opacity(
+                            opacity: ispressed1 ? 1.0 : 0.3,
+                            child: Text(
+                              "깃허브",
+                              style: TextStyle(
+                                  color: ispressed1
+                                      ? CommonColor.blue
+                                      : Colors.black,
+                                  fontSize: textSize1.sp,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          )),
+                      ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              ispressed2 = true;
+                              ispressed1 = false;
+                              textSize2 = 24;
+                              textSize1 = 18;
+                              leftPadding = 210;
+                              opacity1 = 1;
+                              opacity2 = 0;
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            elevation: 0.0,
+                          ),
+                          child: Opacity(
+                            opacity: ispressed2 ? 1.0 : 0.3,
+                            child: Text(
+                              "백준",
+                              style: TextStyle(
+                                color: ispressed2
                                     ? CommonColor.blue
                                     : Colors.black,
-                                fontSize: textSize1.sp,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        )),
-                    ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            ispressed2 = true;
-                            ispressed1 = false;
-                            textSize2 = 24;
-                            textSize1 = 18;
-                            leftPadding = 210;
-                            opacity1 = 1;
-                            opacity2 = 0;
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.transparent,
-                          elevation: 0.0,
-                        ),
-                        child: Opacity(
-                          opacity: ispressed2 ? 1.0 : 0.3,
-                          child: Text(
-                            "백준",
-                            style: TextStyle(
-                              color:
-                                  ispressed2 ? CommonColor.blue : Colors.black,
-                              fontSize: textSize2.sp,
-                              fontWeight: FontWeight.w500,
+                                fontSize: textSize2.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          ),
-                        )),
+                          )),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            centerTitle: true,
+            elevation: 1.0,
+          ),
+        ),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Center(
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    AnimatedOpacity(
+                      opacity: opacity1,
+                      duration: const Duration(microseconds: 1000000),
+                      child: BaekRank(myRank: myRank),
+                    ),
+                    AnimatedOpacity(
+                      opacity: opacity2,
+                      duration: const Duration(microseconds: 1000000),
+                      child: GithubRank(myRank: myRank),
+                    ),
                   ],
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  AnimatedPadding(
-                    duration: const Duration(microseconds: 100000),
-                    padding: EdgeInsets.only(left: leftPadding.w),
-                    child: Container(
-                      width: 160.w,
-                      height: 1.h,
-                      color: CommonColor.blue,
-                    ),
-                  ),
-                ],
-              ),
-              Stack(
-                children: [
-                  AnimatedOpacity(
-                    opacity: opacity1,
-                    duration: const Duration(microseconds: 1000000),
-                    child: BaekRank(myRank: myRank),
-                  ),
-                  AnimatedOpacity(
-                    opacity: opacity2,
-                    duration: const Duration(microseconds: 1000000),
-                    child: GithubRank(myRank: myRank),
-                  ),
-                ],
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
