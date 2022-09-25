@@ -118,6 +118,7 @@ class _RankState extends State<Rank> {
           child: AppBar(
             toolbarHeight: 120.h,
             backgroundColor: CommonColor.gray,
+            leading: Icon(null),
             // leading: Padding(
             //   padding: EdgeInsets.only(top: 15.h),
             //   child: IconButton(
@@ -149,9 +150,10 @@ class _RankState extends State<Rank> {
             //   ),
             // ],
             title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 16.h),
+                  padding: EdgeInsets.only(top: 16.h, left: 50.w),
                   child: Text(
                     "LEADERBOARD",
                     style: TextStyle(
@@ -161,7 +163,7 @@ class _RankState extends State<Rank> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 60.w, right: 60.w),
+                  padding: EdgeInsets.only(left: 10.w, right: 70.w, top: 10.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
