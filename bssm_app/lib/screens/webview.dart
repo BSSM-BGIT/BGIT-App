@@ -32,7 +32,7 @@ class _WebviewState extends State<Webview> {
   }
 
   _postRequest() async {
-    String url = 'http://52.79.57.84:8080/auth/oauth/bsm';
+    String url = 'http://10.0.2.2:8080/auth/oauth/bsm';
 
     http.Response response = await http.post(
       Uri.parse(url),
@@ -80,7 +80,8 @@ class _WebviewState extends State<Webview> {
                 if (request.url.contains(url)) {
                   setState(() {
                     code = request.url.split("?code=")[1];
-                    
+                    print(code);
+                    _postRequest();
                     close = true;
                   });
                   // do not navigate
