@@ -1,11 +1,14 @@
 import 'package:badges/badges.dart';
 import 'package:bssm_app/common/common.dart';
+import 'package:bssm_app/provider/ispressed.dart';
+import 'package:bssm_app/screens/github/github_webview.dart';
 import 'package:bssm_app/widgets/baekjoon_rank_view.dart';
 import 'package:bssm_app/widgets/github_rank_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:provider/provider.dart';
 
 class Rank extends StatefulWidget {
   const Rank({Key? key}) : super(key: key);
@@ -21,8 +24,8 @@ class _RankState extends State<Rank> {
   int textSize1 = 24;
   int textSize2 = 18;
   int leftPadding = 40;
-  double opacity1 = 1;
-  double opacity2 = 0;
+  double opacity1 = 0;
+  double opacity2 = 1;
 
   @override
   void initState() {
@@ -59,7 +62,7 @@ class _RankState extends State<Rank> {
     Dialogs.materialDialog(
       color: Colors.white,
       msg: '간편하게 등록 해보세요',
-      title: 'github 로그인',
+      title: ispressed1 ? 'github 로그인' : 'baekjoon 로그인',
       lottieBuilder: Lottie.asset(
         'assets/dialog.json',
         fit: BoxFit.contain,
@@ -85,7 +88,10 @@ class _RankState extends State<Rank> {
           ),
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (_) => const GithubWebview()));
+          },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
           child: Padding(
             padding: EdgeInsets.only(left: 10.w, right: 10.w),
@@ -110,15 +116,16 @@ class _RankState extends State<Rank> {
 
   @override
   Widget build(BuildContext context) {
+    var pressed = Provider.of<Pressed>(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: CommonColor.gray,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(100.h),
           child: AppBar(
+            automaticallyImplyLeading: false,
             toolbarHeight: 120.h,
             backgroundColor: CommonColor.gray,
-            leading: Icon(null),
             // leading: Padding(
             //   padding: EdgeInsets.only(top: 15.h),
             //   child: IconButton(
@@ -132,38 +139,70 @@ class _RankState extends State<Rank> {
             //     iconSize: 25.h,
             //   ),
             // ),
-            // actions: [
-            //   Padding(
-            //     padding: EdgeInsets.only(top: 15.h, right: 20.w, bottom: 3.h),
-            //     child: Badge(
-            //       badgeContent: const Text(
-            //         "!",
-            //         style: TextStyle(color: Colors.white),
-            //       ),
-            //       badgeColor: CommonColor.blue,
-            //       child: InkWell(
-            //           onTap: () {
-            //             showDialog();
-            //           },
-            //           child: Image.asset("images/github.png")),
-            //     ),
-            //   ),
-            // ],
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(top: 16.h, left: 50.w),
-                  child: Text(
-                    "LEADERBOARD",
-                    style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontSize: 22.sp,
-                        color: Colors.black),
+                  padding: EdgeInsets.only(left: 120.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: 16.h),
+                        child: Text(
+                          "LEADERBOARD",
+                          style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: 22.sp,
+                              color: Colors.black),
+                        ),
+                      ),
+                      ispressed1
+                          ? pressed.githubispressed
+                              ? const Icon(null)
+                              : Padding(
+                                  padding:
+                                      EdgeInsets.only(top: 15.h, bottom: 3.h),
+                                  child: Badge(
+                                    badgeContent: const Text(
+                                      "!",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    badgeColor: CommonColor.blue,
+                                    child: InkWell(
+                                        onTap: () {
+                                          showDialog();
+                                        },
+                                        child: Image.asset(
+                                          "images/github.png",
+                                          scale: 19.r,
+                                        )),
+                                  ),
+                                )
+                          : Padding(
+                              padding: EdgeInsets.only(top: 15.h, bottom: 3.h),
+                              child: Badge(
+                                badgeContent: const Text(
+                                  "!",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                badgeColor: CommonColor.blue,
+                                child: InkWell(
+                                  onTap: () {
+                                    showDialog();
+                                  },
+                                  child: Image.asset(
+                                    "images/baekjoon.png",
+                                    scale: 12.r,
+                                  ),
+                                ),
+                              ),
+                            )
+                    ],
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 10.w, right: 70.w, top: 10.h),
+                  padding: EdgeInsets.only(left: 60.w, right: 60.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
