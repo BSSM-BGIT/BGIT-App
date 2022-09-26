@@ -46,7 +46,7 @@ List<Widget> makeCommunityList(
         },
         child: Container(
           width: double.infinity,
-          height: 80.h,
+          height: 95.h,
           decoration: BoxDecoration(
             color: Colors.transparent,
             border: Border.all(
