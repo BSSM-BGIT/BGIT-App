@@ -25,17 +25,15 @@ class _MyAppState extends State<MyApp> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom]);
     return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => Pressed())
-      ],
+      providers: [ChangeNotifierProvider(create: (_) => Pressed())],
       child: ScreenUtilInit(
         designSize: const Size(414, 736),
         builder: (BuildContext context, Widget? child) => const MaterialApp(
-          title: 'BSSM_Git',
-          debugShowCheckedModeBanner: false,
-          home: HomePage()
-        ),
+            title: 'BSSM_Git',
+            debugShowCheckedModeBanner: false,
+            home: HomePage()),
       ),
     );
+    
   }
 }
