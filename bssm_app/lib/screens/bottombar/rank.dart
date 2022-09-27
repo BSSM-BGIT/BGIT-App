@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:badges/badges.dart';
 import 'package:bssm_app/common/common.dart';
 import 'package:bssm_app/provider/ispressed.dart';
@@ -9,6 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:http/http.dart' as http;
 
 class Rank extends StatefulWidget {
   const Rank({Key? key}) : super(key: key);
@@ -26,7 +30,8 @@ class _RankState extends State<Rank> {
   int leftPadding = 40;
   double opacity1 = 0;
   double opacity2 = 1;
-
+  bool loading = false;
+  final _idController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -48,17 +53,137 @@ class _RankState extends State<Rank> {
     FlutterNativeSplash.remove();
   }
 
-  void showDialog() {
-    // showAnimatedDialog(
-    //   context: context,
-    //   barrierDismissible: true,
-    //   builder: (BuildContext context) {
-    //     return
-    //   },
-    //   animationType: DialogTransitionType.slideFromBottomFade,
-    //   curve: Curves.fastOutSlowIn,
-    //   duration: const Duration(seconds: 1),
-    // );
+  //백준 인증
+  void postequest(String access, var pressed) async {
+    String url = 'http://52.79.57.84:8080/auth/boj';
+    http.Response response =
+        await http.post(Uri.parse(url), headers: <String, String>{
+      'ACCESS-TOKEN': access,
+    });
+    if (response.statusCode == 200) {
+      String jsonData = response.body;
+      var parsingData = jsonDecode(jsonData);
+      pressed.baekjoonchange(); //인증 후 bool 값을 true로 바꿈
+    }
+  }
+
+  //백준 코드 발급
+  void getRequest(String access, var pressed) async {
+    String url = 'http://52.79.57.84:8080/boj/random?bojId=qorwnsduftlagl';
+
+    http.Response response =
+        await http.get(Uri.parse(url), headers: <String, String>{
+      'ACCESS-TOKEN': access,
+    });
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      String jsonData = response.body;
+      var parsingData = jsonDecode(jsonData);
+      var code = parsingData['code'];
+
+      solvedAc(access, code, pressed); //코드를 발급하고 code를 넘겨서 solveac 실행
+    } else {
+      print("오류발생");
+    }
+  }
+
+  void solvedAc(String accessToken, String code, var pressed) {
+    showDialog(
+        context: context,
+        //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            //Dialog Main Title
+            title: Column(
+              children: const [
+                Text("SolvedAc 상태메세지에\n 코드를 입력해주세요!"),
+              ],
+            ),
+            //
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  code,
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              ElevatedButton(
+                child: const Text("취소"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ElevatedButton(
+                child: const Text("확인"),
+                onPressed: () {
+                  postequest(accessToken, pressed);
+                  Navigator.pop(context);
+                  setState(() {});
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  void baekjoonId(String access, var pressed) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("등록할 백준 아이디를 입력해주세요"),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 28.w, right: 28.w),
+                  child: TextField(
+                    controller: _idController,
+                    decoration: InputDecoration(
+                      labelText: '백준 아이디',
+                      enabledBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide:
+                            BorderSide(color: CommonColor.blue, width: 1),
+                      ),
+                      focusedErrorBorder: const UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.red, width: 5),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              ElevatedButton(
+                child: const Text("취소"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              ElevatedButton(
+                child: const Text("확인"),
+                onPressed: () {
+                  getRequest(access, pressed);
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  void showDialog1(String accessToken, var pressed) {
     Dialogs.materialDialog(
       color: Colors.white,
       msg: '간편하게 등록 해보세요',
@@ -73,7 +198,7 @@ class _RankState extends State<Rank> {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          style: ElevatedButton.styleFrom(primary: Colors.white),
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
           child: Padding(
             padding: EdgeInsets.only(left: 10.w, right: 10.w),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -89,8 +214,16 @@ class _RankState extends State<Rank> {
         ),
         ElevatedButton(
           onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (_) => const GithubWebview()));
+            ispressed1
+                ? Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => const GithubWebview()))
+                : {
+                    setState(() {
+                      loading = true;
+                    }),
+                    baekjoonId(accessToken, pressed),
+                    Navigator.of(context).pop()
+                  };
           },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
           child: Padding(
@@ -171,7 +304,8 @@ class _RankState extends State<Rank> {
                                     badgeColor: CommonColor.blue,
                                     child: InkWell(
                                         onTap: () {
-                                          showDialog();
+                                          showDialog1(
+                                              pressed.accessToken, pressed);
                                         },
                                         child: Image.asset(
                                           "images/github.png",
@@ -179,25 +313,29 @@ class _RankState extends State<Rank> {
                                         )),
                                   ),
                                 )
-                          : Padding(
-                              padding: EdgeInsets.only(top: 15.h, bottom: 3.h),
-                              child: Badge(
-                                badgeContent: const Text(
-                                  "!",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                badgeColor: CommonColor.blue,
-                                child: InkWell(
-                                  onTap: () {
-                                    showDialog();
-                                  },
-                                  child: Image.asset(
-                                    "images/baekjoon.png",
-                                    scale: 12.r,
+                          : pressed.bsmispressed
+                              ? const Icon(null)
+                              : Padding(
+                                  padding:
+                                      EdgeInsets.only(top: 15.h, bottom: 3.h),
+                                  child: Badge(
+                                    badgeContent: const Text(
+                                      "!",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    badgeColor: CommonColor.blue,
+                                    child: InkWell(
+                                      onTap: () {
+                                        showDialog1(
+                                            pressed.accessToken, pressed);
+                                      },
+                                      child: Image.asset(
+                                        "images/baekjoon.png",
+                                        scale: 12.r,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            )
+                                )
                     ],
                   ),
                 ),
@@ -300,8 +438,6 @@ class _RankState extends State<Rank> {
   }
 }
 
-
-
 // import 'package:bssm_app/common/common.dart';
 // import 'package:bssm_app/widgets/rank_view.dart';
 // import 'package:flutter/material.dart';
@@ -323,10 +459,8 @@ class _RankState extends State<Rank> {
 //   late int rankColor;
 //   bool registration = false;
 
-//   
-//  
-
-
+//
+//
 
 //   @override
 //   Widget build(BuildContext context) {
@@ -354,7 +488,7 @@ class _RankState extends State<Rank> {
 //         ),
 //         backgroundColor: CommonColor.purple4,
 //         actions: [
-//           
+//
 //         ],
 //       ),
 //       body: SingleChildScrollView(
