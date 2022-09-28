@@ -10,7 +10,7 @@ class Pressed extends ChangeNotifier {
   String get accessToken => _accessToken;
   bool get bsmispressed => _bsmispressed;
   bool get githubispressed => _githubispressed;
-
+  bool get baekjoonispressed => _baekjoonispressed;
   void bsmchange() {
     _bsmispressed = true;
     print("실행됨");
