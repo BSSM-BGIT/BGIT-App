@@ -60,9 +60,9 @@ class _RankState extends State<Rank> {
         await http.post(Uri.parse(url), headers: <String, String>{
       'ACCESS-TOKEN': access,
     });
+    print('실행되었습ㄴ디ㅏ');
+    print(response.statusCode);
     if (response.statusCode == 200) {
-      String jsonData = response.body;
-      var parsingData = jsonDecode(jsonData);
       pressed.baekjoonchange(); //인증 후 bool 값을 true로 바꿈
     }
   }
@@ -70,7 +70,8 @@ class _RankState extends State<Rank> {
   //백준 코드 발급
   void getRequest(String access, var pressed) async {
     String url = 'http://52.79.57.84:8080/boj/random?bojId=qorwnsduftlagl';
-
+    print("111111111111111111111111111");
+    print(access);
     http.Response response =
         await http.get(Uri.parse(url), headers: <String, String>{
       'ACCESS-TOKEN': access,
@@ -124,7 +125,6 @@ class _RankState extends State<Rank> {
                 child: const Text("확인"),
                 onPressed: () {
                   postequest(accessToken, pressed);
-                  Navigator.pop(context);
                   setState(() {});
                 },
               ),
@@ -135,6 +135,7 @@ class _RankState extends State<Rank> {
 
   void baekjoonId(String access, var pressed) {
     showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (context) {
           return AlertDialog(
@@ -175,7 +176,6 @@ class _RankState extends State<Rank> {
                 child: const Text("확인"),
                 onPressed: () {
                   getRequest(access, pressed);
-                  Navigator.pop(context);
                 },
               ),
             ],
@@ -185,6 +185,7 @@ class _RankState extends State<Rank> {
 
   void showDialog1(String accessToken, var pressed) {
     Dialogs.materialDialog(
+      barrierDismissible: false,
       color: Colors.white,
       msg: '간편하게 등록 해보세요',
       title: ispressed1 ? 'github 로그인' : 'baekjoon 로그인',
@@ -221,8 +222,8 @@ class _RankState extends State<Rank> {
                     setState(() {
                       loading = true;
                     }),
+                    Navigator.of(context).pop(),
                     baekjoonId(accessToken, pressed),
-                    Navigator.of(context).pop()
                   };
           },
           style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
@@ -313,7 +314,7 @@ class _RankState extends State<Rank> {
                                         )),
                                   ),
                                 )
-                          : pressed.bsmispressed
+                          : pressed.baekjoonispressed
                               ? const Icon(null)
                               : Padding(
                                   padding:
