@@ -69,7 +69,7 @@ class _RankState extends State<Rank> {
 
   //백준 코드 발급
   void getRequest(String access, var pressed) async {
-    String url = 'http://52.79.57.84:8080/boj/random?bojId=qorwnsduftlagl';
+    String url = 'http://52.79.57.84:8080/boj/random';
     print("111111111111111111111111111");
     print(access);
     http.Response response =
@@ -139,13 +139,13 @@ class _RankState extends State<Rank> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("등록할 백준 아이디를 입력해주세요"),
+            title: Text("백준 아이디 입력"),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 28.w, right: 28.w),
+                  padding: EdgeInsets.only(left: 10.w, right: 10.w),
                   child: TextField(
                     controller: _idController,
                     decoration: InputDecoration(
