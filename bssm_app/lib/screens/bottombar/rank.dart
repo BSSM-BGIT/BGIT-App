@@ -35,22 +35,6 @@ class _RankState extends State<Rank> {
   @override
   void initState() {
     super.initState();
-    initialization();
-  }
-
-  void initialization() async {
-    // This is where you can initialize the resources needed by your app while
-    // the splash screen is displayed.  Remove the following example because
-    // delaying the user experience is a bad design practice!
-    // ignore_for_file: avoid_print
-    print('ready in 3...');
-    await Future.delayed(const Duration(seconds: 1));
-    print('ready in 2...');
-    await Future.delayed(const Duration(seconds: 1));
-    print('ready in 1...');
-    await Future.delayed(const Duration(seconds: 1));
-    print('go!');
-    FlutterNativeSplash.remove();
   }
 
   //백준 인증
@@ -81,7 +65,7 @@ class _RankState extends State<Rank> {
       String jsonData = response.body;
       var parsingData = jsonDecode(jsonData);
       var code = parsingData['code'];
-
+      Navigator.of(context).pop();
       solvedAc(access, code, pressed); //코드를 발급하고 code를 넘겨서 solveac 실행
     } else {
       print("오류발생");
@@ -124,6 +108,8 @@ class _RankState extends State<Rank> {
               ElevatedButton(
                 child: const Text("확인"),
                 onPressed: () {
+                  print("333333333333333333333");
+                  print(accessToken);
                   postequest(accessToken, pressed);
                   setState(() {});
                 },
