@@ -21,7 +21,7 @@ class _WebviewState extends State<GithubWebview> {
   bool close = false;
   bool postend = false;
   String code = "";
-  String url = "http://localhost:3000/oauth/git?code=";
+  String url = "https://bgit.bssm.kro.kr/";
   String accessToken = "";
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
@@ -44,24 +44,11 @@ class _WebviewState extends State<GithubWebview> {
       'ACCESS-TOKEN': accessToken,
     }, body: <String, String>{
       'code': code
-    },
+    });
 
-    );
-    if (response.statusCode == 200) {
-    Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage()));
-    }
-    // http.Response response = await http.post(
-    //   Uri.parse(url),
-    //   headers: <String, String>{
-    //     'authCode': code,
-    //   },
-    // );
-    // print(response.statusCode);
-    // if (response.statusCode == 200) {
-    //   String jsonData = response.body;
-    //   print(jsonData);
-    //   print(jsonData);
-    // }
+    
+      Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage()));
+   
   }
 
   @override
@@ -75,7 +62,7 @@ class _WebviewState extends State<GithubWebview> {
                   'https://github.com/login/oauth/authorize?client_id=b87feaccd801817573ad&scope=id,name,email,avatar_url',
               javascriptMode: JavascriptMode.unrestricted,
               navigationDelegate: (NavigationRequest request) {
-                if (request.url.contains(url)) {
+                if (request.url.contains("?code=")) {
                   setState(() {
                     code = request.url.split("?code=")[1];
                     close = true;
@@ -87,6 +74,8 @@ class _WebviewState extends State<GithubWebview> {
                   });
                   // do not navigate
                   return NavigationDecision.prevent;
+                }else if(request.url.contains(url)){
+
                 }
 
                 return NavigationDecision.navigate;
