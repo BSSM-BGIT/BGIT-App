@@ -44,6 +44,8 @@ class _WebviewState extends State<Webview> {
     print(accessToken);
     pressed = pressed.inputaccesstoken(accessToken);
 
+    Navigator.push(
+        context, MaterialPageRoute(builder: (_) => const BsmSuccess()));
     // http.Response response = await http.post(
     //   Uri.parse(url),
     //   headers: <String, String>{
@@ -73,19 +75,14 @@ class _WebviewState extends State<Webview> {
                   setState(() {
                     code = request.url.split("?code=")[1];
                     close = true;
-
-                    _postRequest(pressed);
-
-                    
                   });
+                  _postRequest(pressed);
+                  pressed.bsmchange();
+                  
                   // do not navigate
                   return NavigationDecision.prevent;
                 } else if (request.url.contains(url)) {
-                  pressed.bsmchange();
-
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => const BsmSuccess()));
-
+                  
                 }
 
                 return NavigationDecision.navigate;
