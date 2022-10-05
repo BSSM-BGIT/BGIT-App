@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GithubRank extends StatefulWidget {
   final int myRank;
-  const GithubRank({Key? key, required this.myRank}) : super(key: key);
+  final List<GitRanklist> ranks;
+  const GithubRank({Key? key, required this.myRank, required this.ranks}) : super(key: key);
 
   @override
   State<GithubRank> createState() => _RankviewState();
@@ -14,16 +15,12 @@ class GithubRank extends StatefulWidget {
 class _RankviewState extends State<GithubRank> {
   List<GitRanklist> ranks = <GitRanklist>[];
 
-  int count = 10000;
-
   @override
   void initState() {
     super.initState();
-    for (int i = 1; i <= 9; i++) {
-      ranks.add(GitRanklist(i, "profile", "userName$i", "name", count));
-      count -= 100;
-    }
   }
+
+//get으로 github 랭킹을 불러옴
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +63,17 @@ class _RankviewState extends State<GithubRank> {
                           width: 50.w,
                           decoration: const BoxDecoration(
                               shape: BoxShape.circle, color: Colors.black),
+
+                          // Image.network(
+                          //   img2,
+                          //   errorBuilder: ((context, error, stackTrace) {
+                          //     return Text("$error");
+                          //   }),
+                          //   fit: BoxFit.fill,
+                          // ),
                         ),
                         Text(
-                          ranks[1].userName,
+                          widget.ranks[1].userName,
                           style: TextStyle(
                             fontFamily: "Roboto",
                             fontSize: 14.sp,
@@ -76,7 +81,7 @@ class _RankviewState extends State<GithubRank> {
                           ),
                         ),
                         Text(
-                          ranks[1].name,
+                          widget.ranks[1].name,
                           style: TextStyle(
                             fontFamily: "Roboto",
                             fontSize: 15.sp,
@@ -87,7 +92,7 @@ class _RankviewState extends State<GithubRank> {
                           height: 9.h,
                         ),
                         Text(
-                          "${ranks[1].commit}",
+                          "${widget.ranks[1].commit}",
                           style: TextStyle(
                             fontFamily: "Roboto",
                             fontSize: 15.sp,
@@ -121,9 +126,14 @@ class _RankviewState extends State<GithubRank> {
                         width: 50.w,
                         decoration: const BoxDecoration(
                             shape: BoxShape.circle, color: Colors.black),
+                        // child:
+                        // Image.network(
+                        //   img1,
+                        //   fit: BoxFit.fill,
+                        // ),
                       ),
                       Text(
-                        ranks[0].userName,
+                        widget.ranks[0].userName,
                         style: TextStyle(
                           fontFamily: "Roboto",
                           fontSize: 16.sp,
@@ -131,7 +141,7 @@ class _RankviewState extends State<GithubRank> {
                         ),
                       ),
                       Text(
-                        ranks[0].name,
+                        widget.ranks[0].name,
                         style: TextStyle(
                           fontFamily: "Roboto",
                           fontSize: 15.sp,
@@ -142,7 +152,7 @@ class _RankviewState extends State<GithubRank> {
                         height: 15.h,
                       ),
                       Text(
-                        "${ranks[0].commit}",
+                        "${widget.ranks[0].commit}",
                         style: TextStyle(
                           fontSize: 15.sp,
                           color: Colors.black,
@@ -178,9 +188,13 @@ class _RankviewState extends State<GithubRank> {
                           width: 50.w,
                           decoration: const BoxDecoration(
                               shape: BoxShape.circle, color: Colors.black),
+                          // child: Image.network(
+                          //   img3,
+                          //   fit: BoxFit.fill,
+                          // ),
                         ),
                         Text(
-                          ranks[2].userName,
+                          widget.ranks[2].userName,
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: CommonColor.blue,
@@ -188,7 +202,7 @@ class _RankviewState extends State<GithubRank> {
                           ),
                         ),
                         Text(
-                          ranks[2].name,
+                          widget.ranks[2].name,
                           style: TextStyle(
                             fontSize: 15.sp,
                             color: Colors.grey.withOpacity(0.8),
@@ -199,7 +213,7 @@ class _RankviewState extends State<GithubRank> {
                           height: 9.h,
                         ),
                         Text(
-                          "${ranks[2].commit}",
+                          "${widget.ranks[2].commit}",
                           style: TextStyle(
                             fontSize: 15.sp,
                             color: Colors.black,
@@ -337,6 +351,10 @@ List<Widget> makeRankList(
               width: 40.w,
               decoration: const BoxDecoration(
                   shape: BoxShape.circle, color: Colors.black),
+              // child: Image.network(
+              //   ranks[i].profile,
+              //   fit: BoxFit.fill,
+              // ),
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 5.h),
