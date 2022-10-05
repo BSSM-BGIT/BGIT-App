@@ -1,3 +1,4 @@
+import 'package:bssm_app/model/glist.dart';
 import 'package:bssm_app/screens/bottombar/community.dart';
 import 'package:bssm_app/screens/bottombar/rank.dart';
 import 'package:bssm_app/screens/bottombar/user.dart';
@@ -7,7 +8,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final List<GitRanklist> gitlists;
+  const HomePage({super.key, required this.gitlists});
 
   @override
   State<HomePage> createState() => _BottomState();
@@ -15,11 +17,16 @@ class HomePage extends StatefulWidget {
 
 class _BottomState extends State<HomePage> {
   var _currentIndex = 0;
-  final List<Widget> _children = [
-    const Rank(),
-    const Community(),
-    const User()
-  ];
+  late List<GitRanklist> glists;
+  late List<Widget> _children;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    glists = widget.gitlists;
+    _children = [Rank(gitranks: widget.gitlists,), const Community(), const User()];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
