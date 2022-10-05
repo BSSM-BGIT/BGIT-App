@@ -1,14 +1,12 @@
 import 'package:bssm_app/provider/ispressed.dart';
 import 'package:bssm_app/screens/bottombar/bottom.dart';
+import 'package:bssm_app/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   runApp(const MyApp());
 }
 
@@ -31,7 +29,7 @@ class _MyAppState extends State<MyApp> {
         builder: (BuildContext context, Widget? child) => const MaterialApp(
             title: 'BSSM_Git',
             debugShowCheckedModeBanner: false,
-            home: HomePage()),
+            home: Loading()),
       ),
     );
     
