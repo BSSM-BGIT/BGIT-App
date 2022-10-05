@@ -1,4 +1,5 @@
 import 'package:bssm_app/provider/ispressed.dart';
+import 'package:bssm_app/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:bssm_app/screens/bottombar/bottom.dart';
@@ -36,7 +37,7 @@ class _BsmSuccessState extends State<BsmSuccess> {
             ElevatedButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => const HomePage()));
+                      MaterialPageRoute(builder: (_) => const Loading()));
                 },
                 child: Text(
                   "돌아가기",
