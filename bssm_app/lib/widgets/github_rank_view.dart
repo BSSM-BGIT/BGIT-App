@@ -1,20 +1,19 @@
 import 'package:bssm_app/common/common.dart';
 import 'package:bssm_app/model/glist.dart';
+import 'package:bssm_app/provider/githubranks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class GithubRank extends StatefulWidget {
   final int myRank;
-  final List<GitRanklist> ranks;
-  const GithubRank({Key? key, required this.myRank, required this.ranks}) : super(key: key);
+  const GithubRank({Key? key, required this.myRank}) : super(key: key);
 
   @override
   State<GithubRank> createState() => _RankviewState();
 }
 
 class _RankviewState extends State<GithubRank> {
-  List<GitRanklist> ranks = <GitRanklist>[];
-
   @override
   void initState() {
     super.initState();
@@ -24,6 +23,7 @@ class _RankviewState extends State<GithubRank> {
 
   @override
   Widget build(BuildContext context) {
+    var ranks = Provider.of<GitRanks>(context, listen: false);
     return Center(
       child: Column(
         children: [
@@ -61,19 +61,18 @@ class _RankviewState extends State<GithubRank> {
                           margin: EdgeInsets.only(top: 10.h, bottom: 3.h),
                           height: 50.h,
                           width: 50.w,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle, color: Colors.black),
-
-                          // Image.network(
-                          //   img2,
-                          //   errorBuilder: ((context, error, stackTrace) {
-                          //     return Text("$error");
-                          //   }),
-                          //   fit: BoxFit.fill,
-                          // ),
+                          decoration:
+                              const BoxDecoration(shape: BoxShape.circle),
+                          child: Image.network(
+                            ranks.gitList[1].profile,
+                            errorBuilder: ((context, error, stackTrace) {
+                              return Text("$error");
+                            }),
+                            fit: BoxFit.fill,
+                          ),
                         ),
                         Text(
-                          widget.ranks[1].userName,
+                          ranks.gitList[1].userName,
                           style: TextStyle(
                             fontFamily: "Roboto",
                             fontSize: 14.sp,
@@ -81,7 +80,7 @@ class _RankviewState extends State<GithubRank> {
                           ),
                         ),
                         Text(
-                          widget.ranks[1].name,
+                          ranks.gitList[1].name,
                           style: TextStyle(
                             fontFamily: "Roboto",
                             fontSize: 15.sp,
@@ -92,7 +91,7 @@ class _RankviewState extends State<GithubRank> {
                           height: 9.h,
                         ),
                         Text(
-                          "${widget.ranks[1].commit}",
+                          "${ranks.gitList[1].commit}",
                           style: TextStyle(
                             fontFamily: "Roboto",
                             fontSize: 15.sp,
@@ -124,16 +123,14 @@ class _RankviewState extends State<GithubRank> {
                         margin: EdgeInsets.only(top: 20.h, bottom: 10.h),
                         height: 50.h,
                         width: 50.w,
-                        decoration: const BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.black),
-                        // child:
-                        // Image.network(
-                        //   img1,
-                        //   fit: BoxFit.fill,
-                        // ),
+                        decoration: const BoxDecoration(shape: BoxShape.circle),
+                        child: Image.network(
+                          ranks.gitList[0].profile,
+                          fit: BoxFit.fill,
+                        ),
                       ),
                       Text(
-                        widget.ranks[0].userName,
+                        ranks.gitList[0].userName,
                         style: TextStyle(
                           fontFamily: "Roboto",
                           fontSize: 16.sp,
@@ -141,7 +138,7 @@ class _RankviewState extends State<GithubRank> {
                         ),
                       ),
                       Text(
-                        widget.ranks[0].name,
+                        ranks.gitList[0].name,
                         style: TextStyle(
                           fontFamily: "Roboto",
                           fontSize: 15.sp,
@@ -152,7 +149,7 @@ class _RankviewState extends State<GithubRank> {
                         height: 15.h,
                       ),
                       Text(
-                        "${widget.ranks[0].commit}",
+                        "${ranks.gitList[0].commit}",
                         style: TextStyle(
                           fontSize: 15.sp,
                           color: Colors.black,
@@ -186,15 +183,15 @@ class _RankviewState extends State<GithubRank> {
                           margin: EdgeInsets.only(top: 10.h, bottom: 3.h),
                           height: 50.h,
                           width: 50.w,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle, color: Colors.black),
-                          // child: Image.network(
-                          //   img3,
-                          //   fit: BoxFit.fill,
-                          // ),
+                          decoration:
+                              const BoxDecoration(shape: BoxShape.circle),
+                          child: Image.network(
+                            ranks.gitList[2].profile,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                         Text(
-                          widget.ranks[2].userName,
+                          ranks.gitList[2].userName,
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: CommonColor.blue,
@@ -202,7 +199,7 @@ class _RankviewState extends State<GithubRank> {
                           ),
                         ),
                         Text(
-                          widget.ranks[2].name,
+                          ranks.gitList[2].name,
                           style: TextStyle(
                             fontSize: 15.sp,
                             color: Colors.grey.withOpacity(0.8),
@@ -213,7 +210,7 @@ class _RankviewState extends State<GithubRank> {
                           height: 9.h,
                         ),
                         Text(
-                          "${widget.ranks[2].commit}",
+                          "${ranks.gitList[2].commit}",
                           style: TextStyle(
                             fontSize: 15.sp,
                             color: Colors.black,
@@ -299,7 +296,7 @@ class _RankviewState extends State<GithubRank> {
             ),
           ),
           Column(
-            children: makeRankList(context, ranks, widget.myRank),
+            children: makeRankList(context, ranks.gitList, widget.myRank),
           )
         ],
       ),
@@ -349,12 +346,11 @@ List<Widget> makeRankList(
               margin: EdgeInsets.only(bottom: 5.h, right: 8.w),
               height: 40.h,
               width: 40.w,
-              decoration: const BoxDecoration(
-                  shape: BoxShape.circle, color: Colors.black),
-              // child: Image.network(
-              //   ranks[i].profile,
-              //   fit: BoxFit.fill,
-              // ),
+              decoration: const BoxDecoration(shape: BoxShape.circle),
+              child: Image.network(
+                ranks[i].profile,
+                fit: BoxFit.fill,
+              ),
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 5.h),
