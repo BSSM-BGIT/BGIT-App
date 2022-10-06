@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:bssm_app/common/common.dart';
 import 'package:bssm_app/model/blist.dart';
+import 'package:bssm_app/provider/baekjoonranks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class BaekRank extends StatefulWidget {
   final int myRank;
@@ -16,79 +18,14 @@ class BaekRank extends StatefulWidget {
 }
 
 class _RankviewState extends State<BaekRank> {
-  List<BaekjoonRanklist> ranks = <BaekjoonRanklist>[];
-
-  String img1 = "";
-  String id1 = "";
-  String name1 = "";
-  int tier1 = 0;
-  int rating1 = 0;
-  String img2 = "";
-  String id2 = "";
-  String name2 = "";
-  int tier2 = 0;
-  int rating2 = 0;
-  String img3 = "";
-  String id3 = "";
-  String name3 = "";
-  int tier3 = 0;
-  int rating3 = 0;
-
-  void _getRequest() async {
-    String url = 'http://52.79.57.84:8080/user/boj';
-    http.Response response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      String jsonData = response.body;
-      var parsingData = jsonDecode(jsonData);
-      int count = parsingData['count'];
-
-      img1 = parsingData['data'][0]['bojImg'];
-      id1 = parsingData['data'][0]['bojId'];
-      name1 = parsingData['data'][0]['user']['name'];
-      tier1 = parsingData['data'][0]['tier'];
-      rating1 = parsingData['data'][0]['rating'];
-      img2 = parsingData['data'][1]['bojImg'];
-      id2 = parsingData['data'][1]['bojId'];
-      name2 = parsingData['data'][1]['user']['name'];
-      tier2 = parsingData['data'][1]['tier'];
-      rating2 = parsingData['data'][1]['rating'];
-      img3 = parsingData['data'][2]['bojImg'];
-      id3 = parsingData['data'][2]['bojId'];
-      name3 = parsingData['data'][2]['user']['name'];
-      tier3 = parsingData['data'][2]['tier'];
-      rating3 = parsingData['data'][2]['rating'];
-      for (int i = 0; i < count; i++) {
-        bool isnull = false;
-        String img = "";
-        String id = "";
-        String name = "";
-        int tier = 0;
-        int rating = 0;
-
-        img = parsingData['data'][i]['bojImg'];
-        id = parsingData['data'][i]['bojId'];
-        name = parsingData['data'][i]['user']['name'];
-        tier = parsingData['data'][i]['tier'];
-        rating = parsingData['data'][i]['rating'];
-        if (parsingData['data'][i]['githubImg'] == null) {
-          isnull = true;
-        }
-        ranks.add(BaekjoonRanklist(
-            i + 1, isnull ? "true" : img, id, name, tier, rating));
-      }
-    } else {
-      print("오류발생");
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    _getRequest();
   }
 
   @override
   Widget build(BuildContext context) {
+    var ranks = Provider.of<BaekRanks>(context, listen: false);
     return Center(
       child: Column(
         children: [
@@ -122,7 +59,7 @@ class _RankviewState extends State<BaekRank> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        ranks[1].profile == "true"
+                        ranks.baekList[1].profile == "true"
                             ? Container(
                                 margin: EdgeInsets.only(top: 10.h, bottom: 3.h),
                                 height: 50.h,
@@ -139,12 +76,12 @@ class _RankviewState extends State<BaekRank> {
                                     shape: BoxShape.circle,
                                     color: Colors.black),
                                 child: Image.network(
-                                  img2,
+                                  ranks.baekList[1].profile,
                                   fit: BoxFit.fill,
                                 ),
                               ),
                         Text(
-                          id2,
+                          ranks.baekList[1].userName,
                           style: TextStyle(
                             fontFamily: "Roboto",
                             fontSize: 14.sp,
@@ -152,7 +89,7 @@ class _RankviewState extends State<BaekRank> {
                           ),
                         ),
                         Text(
-                          id2,
+                          ranks.baekList[1].name,
                           style: TextStyle(
                             fontFamily: "Roboto",
                             fontSize: 15.sp,
@@ -163,7 +100,7 @@ class _RankviewState extends State<BaekRank> {
                           height: 9.h,
                         ),
                         Text(
-                          "${rating2}/6000",
+                          "${ranks.baekList[1].exp}/6000",
                           style: TextStyle(
                             fontFamily: "Roboto",
                             fontSize: 12.sp,
@@ -191,7 +128,7 @@ class _RankviewState extends State<BaekRank> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      ranks[0].profile == "true"
+                      ranks.baekList[0].profile == "true"
                           ? Container(
                               margin: EdgeInsets.only(top: 10.h, bottom: 3.h),
                               height: 50.h,
@@ -206,12 +143,12 @@ class _RankviewState extends State<BaekRank> {
                               decoration: const BoxDecoration(
                                   shape: BoxShape.circle, color: Colors.black),
                               child: Image.network(
-                                img1,
+                                ranks.baekList[0].profile,
                                 fit: BoxFit.fill,
                               ),
                             ),
                       Text(
-                        id1,
+                        ranks.baekList[0].userName,
                         style: TextStyle(
                           fontFamily: "Roboto",
                           fontSize: 16.sp,
@@ -219,7 +156,7 @@ class _RankviewState extends State<BaekRank> {
                         ),
                       ),
                       Text(
-                        name1,
+                        ranks.baekList[0].name,
                         style: TextStyle(
                           fontFamily: "Roboto",
                           fontSize: 15.sp,
@@ -230,7 +167,7 @@ class _RankviewState extends State<BaekRank> {
                         height: 15.h,
                       ),
                       Text(
-                        "${rating1}/6000",
+                        "${ranks.baekList[0].exp}/6000",
                         style: TextStyle(
                           fontSize: 12.sp,
                           color: Colors.black,
@@ -260,7 +197,7 @@ class _RankviewState extends State<BaekRank> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        ranks[2].profile == "true"
+                        ranks.baekList[2].profile == "true"
                             ? Container(
                                 margin: EdgeInsets.only(top: 10.h, bottom: 3.h),
                                 height: 50.h,
@@ -277,12 +214,12 @@ class _RankviewState extends State<BaekRank> {
                                     shape: BoxShape.circle,
                                     color: Colors.black),
                                 child: Image.network(
-                                  img3,
+                                  ranks.baekList[2].profile,
                                   fit: BoxFit.fill,
                                 ),
                               ),
                         Text(
-                          id3,
+                          ranks.baekList[2].userName,
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: CommonColor.blue,
@@ -290,7 +227,7 @@ class _RankviewState extends State<BaekRank> {
                           ),
                         ),
                         Text(
-                          name3,
+                          ranks.baekList[2].name,
                           style: TextStyle(
                             fontSize: 15.sp,
                             color: Colors.grey.withOpacity(0.8),
@@ -301,7 +238,7 @@ class _RankviewState extends State<BaekRank> {
                           height: 9.h,
                         ),
                         Text(
-                          "${rating3}/6000",
+                          "${ranks.baekList[2].exp}/6000",
                           style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black,
@@ -387,7 +324,7 @@ class _RankviewState extends State<BaekRank> {
             ),
           ),
           Column(
-            children: makeRankList(context, ranks, widget.myRank),
+            children: makeRankList(context, ranks.baekList, widget.myRank),
           )
         ],
       ),
@@ -439,13 +376,22 @@ List<Widget> makeRankList(
                               fontWeight: FontWeight.w500),
                         ),
                       )),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 5.h, right: 8.w),
-                    height: 40.h,
-                    width: 40.w,
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle, color: Colors.black),
-                  ),
+                  ranks[i].profile == "true"
+                      ? Container(
+                          margin: EdgeInsets.only(bottom: 5.h, right: 8.w),
+                          height: 40.h,
+                          width: 40.w,
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: Colors.black),
+                        )
+                      : Container(
+                          margin: EdgeInsets.only(bottom: 5.h, right: 8.w),
+                          height: 40.h,
+                          width: 40.w,
+                          decoration:
+                              const BoxDecoration(shape: BoxShape.circle),
+                          child: Image.network(ranks[i].profile),
+                        ),
                   Padding(
                     padding: EdgeInsets.only(bottom: 5.h),
                     child: SizedBox(
