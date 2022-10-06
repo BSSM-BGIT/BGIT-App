@@ -8,8 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomePage extends StatefulWidget {
-  final List<GitRanklist> gitlists;
-  const HomePage({super.key, required this.gitlists});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _BottomState();
@@ -17,15 +16,8 @@ class HomePage extends StatefulWidget {
 
 class _BottomState extends State<HomePage> {
   var _currentIndex = 0;
-  late List<GitRanklist> glists;
-  late List<Widget> _children;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    glists = widget.gitlists;
-    _children = [Rank(gitranks: widget.gitlists,), const Community(), const User()];
-  }
+
+  List<Widget> _children = [const Rank(), const Community(), const User()];
 
   @override
   Widget build(BuildContext context) {
