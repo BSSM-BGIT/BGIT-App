@@ -1,5 +1,7 @@
+import 'package:bssm_app/provider/githubranks.dart';
 import 'package:bssm_app/provider/ispressed.dart';
 import 'package:bssm_app/screens/bottombar/bottom.dart';
+import 'package:bssm_app/screens/bsm/bsm_loginsuccess.dart';
 import 'package:bssm_app/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,7 +25,10 @@ class _MyAppState extends State<MyApp> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: [SystemUiOverlay.bottom]);
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => Pressed())],
+      providers: [
+        ChangeNotifierProvider.value(value: Pressed()),
+        ChangeNotifierProvider.value(value: GitRanks()),
+      ],
       child: ScreenUtilInit(
         designSize: const Size(414, 736),
         builder: (BuildContext context, Widget? child) => const MaterialApp(
@@ -32,6 +37,5 @@ class _MyAppState extends State<MyApp> {
             home: Loading()),
       ),
     );
-    
   }
 }
