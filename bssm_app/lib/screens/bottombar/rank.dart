@@ -13,8 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 class Rank extends StatefulWidget {
-  final List<GitRanklist> gitranks;
-  const Rank({Key? key, required this.gitranks}) : super(key: key);
+  const Rank({Key? key}) : super(key: key);
 
   @override
   State<Rank> createState() => _RankState();
@@ -35,39 +34,10 @@ class _RankState extends State<Rank> {
   @override
   void initState() {
     super.initState();
-    getRequest1();
   }
 
   int count = 0;
   var parsingData;
-
-  void getRequest1() async {
-    String url = 'http://52.79.57.84:8080/user/git';
-    http.Response response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      String jsonData = response.body;
-      parsingData = jsonDecode(jsonData);
-      count = parsingData['count'];
-      print(parsingData['data'][0]['githubImg']);
-      img1 = parsingData['data'][0]['githubImg'];
-      print(img1);
-    } else {
-      print("오류발생");
-    }
-  }
-
-  String img1 = "";
-  String id1 = "";
-  String name1 = "";
-  int commit1 = 0;
-  String img2 = "";
-  String id2 = "";
-  String name2 = "";
-  int commit2 = 0;
-  String img3 = "";
-  String id3 = "";
-  String name3 = "";
-  int commit3 = 0;
 
   //백준 인증
   void postequest(String access, var pressed) async {
@@ -439,7 +409,7 @@ class _RankState extends State<Rank> {
                     AnimatedOpacity(
                       opacity: opacity2,
                       duration: const Duration(microseconds: 1000000),
-                      child: GithubRank(myRank: myRank, ranks: widget.gitranks),
+                      child: GithubRank(myRank: myRank),
                     ),
                     AnimatedOpacity(
                         opacity: opacity1,
