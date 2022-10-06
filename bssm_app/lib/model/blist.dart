@@ -5,7 +5,6 @@ class BaekjoonRanklist {
   String name;
   int tier;
   int exp;
-
-  BaekjoonRanklist(
-      this.rank, this.profile, this.userName, this.name, this.tier, this.exp);
+  BaekjoonRanklist(this.rank, this.profile, this.userName, this.name, this.tier,
+      this.exp);
 }
