@@ -19,11 +19,6 @@ class BaekRank extends StatefulWidget {
 
 class _RankviewState extends State<BaekRank> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var ranks = Provider.of<BaekRanks>(context, listen: false);
     return Center(
@@ -64,17 +59,19 @@ class _RankviewState extends State<BaekRank> {
                                 margin: EdgeInsets.only(top: 10.h, bottom: 3.h),
                                 height: 50.h,
                                 width: 50.w,
-                                decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.black),
+                                child: Icon(
+                                  Icons.account_circle,
+                                  color: Colors.grey,
+                                  size: 50.h,
+                                ),
                               )
                             : Container(
                                 margin: EdgeInsets.only(top: 10.h, bottom: 3.h),
                                 height: 50.h,
                                 width: 50.w,
                                 decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.black),
+                                  shape: BoxShape.circle,
+                                ),
                                 child: Image.network(
                                   ranks.baekList[1].profile,
                                   fit: BoxFit.fill,
@@ -133,15 +130,18 @@ class _RankviewState extends State<BaekRank> {
                               margin: EdgeInsets.only(top: 10.h, bottom: 3.h),
                               height: 50.h,
                               width: 50.w,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle, color: Colors.black),
+                              child:  Icon(
+                                Icons.account_circle,
+                                color: Colors.grey,
+                                size: 50.h,
+                              ),
                             )
                           : Container(
                               margin: EdgeInsets.only(top: 10.h, bottom: 3.h),
                               height: 50.h,
                               width: 50.w,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle, color: Colors.black),
+                              decoration:
+                                  const BoxDecoration(shape: BoxShape.circle),
                               child: Image.network(
                                 ranks.baekList[0].profile,
                                 fit: BoxFit.fill,
@@ -202,17 +202,18 @@ class _RankviewState extends State<BaekRank> {
                                 margin: EdgeInsets.only(top: 10.h, bottom: 3.h),
                                 height: 50.h,
                                 width: 50.w,
-                                decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.black),
+                                child: Icon(
+                                  Icons.account_circle,
+                                  color: Colors.grey,
+                                  size: 50.h,
+                                ),
                               )
                             : Container(
                                 margin: EdgeInsets.only(top: 10.h, bottom: 3.h),
                                 height: 50.h,
                                 width: 50.w,
-                                decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.black),
+                                decoration:
+                                    const BoxDecoration(shape: BoxShape.circle),
                                 child: Image.network(
                                   ranks.baekList[2].profile,
                                   fit: BoxFit.fill,
@@ -378,11 +379,14 @@ List<Widget> makeRankList(
                       )),
                   ranks[i].profile == "true"
                       ? Container(
-                          margin: EdgeInsets.only(bottom: 5.h, right: 8.w),
+                          margin: EdgeInsets.only(right: 10.w),
                           height: 40.h,
                           width: 40.w,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle, color: Colors.black),
+                          child: Icon(
+                            Icons.account_circle,
+                            color: Colors.grey,
+                            size: 50.h,
+                          ),
                         )
                       : Container(
                           margin: EdgeInsets.only(bottom: 5.h, right: 8.w),
