@@ -407,14 +407,14 @@ class _RankState extends State<Rank> {
                 Stack(
                   children: [
                     AnimatedOpacity(
+                        opacity: opacity1,
+                        duration: const Duration(microseconds: 1000000),
+                        child: BaekRank(myRank:myRank)),
+                    AnimatedOpacity(
                       opacity: opacity2,
                       duration: const Duration(microseconds: 1000000),
                       child: GithubRank(myRank: myRank),
                     ),
-                    AnimatedOpacity(
-                        opacity: opacity1,
-                        duration: const Duration(microseconds: 1000000),
-                        child: const Text("data"))
                   ],
                 ),
               ],
