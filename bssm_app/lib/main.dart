@@ -1,3 +1,4 @@
+import 'package:bssm_app/provider/baekjoonranks.dart';
 import 'package:bssm_app/provider/githubranks.dart';
 import 'package:bssm_app/provider/ispressed.dart';
 import 'package:bssm_app/screens/bottombar/bottom.dart';
@@ -28,6 +29,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider.value(value: Pressed()),
         ChangeNotifierProvider.value(value: GitRanks()),
+        ChangeNotifierProvider.value(value: BaekRanks()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(414, 736),
