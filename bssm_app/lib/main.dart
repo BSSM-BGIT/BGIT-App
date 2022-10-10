@@ -1,8 +1,6 @@
 import 'package:bssm_app/provider/baekjoonranks.dart';
 import 'package:bssm_app/provider/githubranks.dart';
 import 'package:bssm_app/provider/ispressed.dart';
-import 'package:bssm_app/screens/bottombar/bottom.dart';
-import 'package:bssm_app/screens/bsm/bsm_loginsuccess.dart';
 import 'package:bssm_app/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
