@@ -7,9 +7,9 @@ class BaekRanks extends ChangeNotifier {
 
   List<BaekjoonRanklist> get baekList => _baekList;
 
-  void add(int rank, String profile, String userName, String name, int tier,
-      int exp) {
-    baekList.add(BaekjoonRanklist(rank, profile, userName, name, tier, exp));
+  void add(int rank, String profile, String userName, String name, String tier,
+      int exp, int maxrating) {
+    baekList.add(BaekjoonRanklist(rank, profile, userName, name, tier, exp, maxrating));
     notifyListeners();
   }
 }
