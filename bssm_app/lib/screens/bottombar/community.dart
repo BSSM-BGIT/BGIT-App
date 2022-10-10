@@ -67,7 +67,7 @@ class _CommunityState extends State<Community> {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [CommunityList()],
+            children: const[CommunityList()],
           ),
         ),
       ),
