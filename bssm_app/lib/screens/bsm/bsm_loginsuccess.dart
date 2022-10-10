@@ -2,7 +2,6 @@ import 'package:bssm_app/provider/ispressed.dart';
 import 'package:bssm_app/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:bssm_app/screens/bottombar/bottom.dart';
 import 'package:provider/provider.dart';
 
 class BsmSuccess extends StatefulWidget {
@@ -16,11 +15,11 @@ class _BsmSuccessState extends State<BsmSuccess> {
   @override
   void initState() {
     super.initState();
-    print("로그인 성공!");
   }
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     var pressed = Provider.of<Pressed>(context);
     return Scaffold(
       body: Center(
