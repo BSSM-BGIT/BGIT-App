@@ -1,4 +1,3 @@
-import 'package:bssm_app/model/glist.dart';
 import 'package:bssm_app/screens/bottombar/community.dart';
 import 'package:bssm_app/screens/bottombar/rank.dart';
 import 'package:bssm_app/screens/bottombar/user.dart';
@@ -17,7 +16,7 @@ class HomePage extends StatefulWidget {
 class _BottomState extends State<HomePage> {
   var _currentIndex = 0;
 
-  List<Widget> _children = [const Rank(), const Community(), const User()];
+  final List<Widget> _children = [const Rank(), const Community(), const User()];
 
   @override
   Widget build(BuildContext context) {
