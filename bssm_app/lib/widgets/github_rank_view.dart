@@ -231,22 +231,12 @@ class _RankviewState extends State<GithubRank> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "My Rank",
+                  "Rank",
                   style: TextStyle(
                       fontSize: 18.sp,
                       fontFamily: "Roboto",
                       color: Colors.black),
                 ),
-                SizedBox(
-                  width: 10.w,
-                ),
-                Text(
-                  "NO.${widget.myRank}",
-                  style: TextStyle(
-                      fontSize: 23.sp,
-                      fontFamily: "Roboto",
-                      color: CommonColor.blue),
-                )
               ],
             ),
           ),
@@ -309,7 +299,6 @@ List<Widget> makeRankList(
   List<Widget> results = [];
 
   for (var i = 3; i < ranks.length; i++) {
-    int rankcolor = colorSelect(ranks[i].rank);
     results.add(Padding(
       padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 13.h),
       child: Container(
@@ -354,7 +343,7 @@ List<Widget> makeRankList(
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 5.h),
-              child: Container(
+              child: SizedBox(
                 width: 160.w,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
