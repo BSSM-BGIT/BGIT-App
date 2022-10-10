@@ -40,10 +40,13 @@ class _WebviewState extends State<Webview> {
 
     var bsmData = await network.getJsonData();
     accessToken = bsmData['accessToken'];
+    // ignore: avoid_print
     print("22222222222222222221222222222222222222222222222222222222");
+      // ignore: avoid_print
     print(accessToken);
     pressed = pressed.inputaccesstoken(accessToken);
 
+    // ignore: use_build_context_synchronously
     Navigator.push(
         context, MaterialPageRoute(builder: (_) => const BsmSuccess()));
     // http.Response response = await http.post(
