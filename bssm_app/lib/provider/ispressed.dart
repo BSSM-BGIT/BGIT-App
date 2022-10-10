@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 
 class Pressed extends ChangeNotifier {
@@ -11,15 +13,14 @@ class Pressed extends ChangeNotifier {
   bool get bsmispressed => _bsmispressed;
   bool get githubispressed => _githubispressed;
   bool get baekjoonispressed => _baekjoonispressed;
+
   void bsmchange() {
     _bsmispressed = true;
-    print("실행됨");
     notifyListeners();
   }
 
   void baekjoonchange() {
     _bsmispressed = true;
-    print("실행됨");
     notifyListeners();
   }
 
@@ -32,6 +33,7 @@ class Pressed extends ChangeNotifier {
     print("access = $access");
 
     _accessToken = access;
+    // ignore: avoid_print
     print("accessToken = $accessToken");
     notifyListeners();
   }
