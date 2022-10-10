@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:badges/badges.dart';
 import 'package:bssm_app/common/common.dart';
-import 'package:bssm_app/model/glist.dart';
 import 'package:bssm_app/provider/ispressed.dart';
 import 'package:bssm_app/screens/github/github_webview.dart';
 import 'package:bssm_app/widgets/baekjoon_rank_view.dart';
@@ -127,7 +126,7 @@ class _RankState extends State<Rank> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("백준 아이디 입력"),
+            title: const Text("백준 아이디 입력"),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
