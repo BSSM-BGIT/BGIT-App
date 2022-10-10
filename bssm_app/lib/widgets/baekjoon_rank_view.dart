@@ -1,12 +1,9 @@
-import 'dart:convert';
-
 import 'package:bssm_app/common/common.dart';
 import 'package:bssm_app/model/blist.dart';
 import 'package:bssm_app/provider/baekjoonranks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
 class BaekRank extends StatefulWidget {
@@ -96,14 +93,18 @@ class _RankviewState extends State<BaekRank> {
                         SizedBox(
                           height: 9.h,
                         ),
-                        Text(
-                          "${ranks.baekList[1].exp}/6000",
-                          style: TextStyle(
-                            fontFamily: "Roboto",
-                            fontSize: 12.sp,
-                            color: Colors.black,
+                        Container(
+                          width: 60.w,
+                          height: 20.h,
+                          decoration: BoxDecoration(
+                            border:
+                                Border.all(color: Colors.black, width: 0.2.w),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.r)),
                           ),
-                        ),
+                          alignment: Alignment.center,
+                          child: Text(ranks.baekList[1].tier),
+                        )
                       ],
                     ),
                   ),
@@ -130,7 +131,7 @@ class _RankviewState extends State<BaekRank> {
                               margin: EdgeInsets.only(top: 10.h, bottom: 3.h),
                               height: 50.h,
                               width: 50.w,
-                              child:  Icon(
+                              child: Icon(
                                 Icons.account_circle,
                                 color: Colors.grey,
                                 size: 50.h,
@@ -166,14 +167,16 @@ class _RankviewState extends State<BaekRank> {
                       SizedBox(
                         height: 15.h,
                       ),
-                      Text(
-                        "${ranks.baekList[0].exp}/6000",
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          color: Colors.black,
-                          fontFamily: "Roboto",
+                      Container(
+                        width: 80.w,
+                        height: 30.h,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 0.2.w),
+                          borderRadius: BorderRadius.all(Radius.circular(30.r)),
                         ),
-                      ),
+                        alignment: Alignment.center,
+                        child: Text(ranks.baekList[0].tier),
+                      )
                     ],
                   ),
                 ),
@@ -238,14 +241,18 @@ class _RankviewState extends State<BaekRank> {
                         SizedBox(
                           height: 9.h,
                         ),
-                        Text(
-                          "${ranks.baekList[2].exp}/6000",
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            color: Colors.black,
-                            fontFamily: "Roboto",
+                        Container(
+                          width: 60.w,
+                          height: 20.h,
+                          decoration: BoxDecoration(
+                            border:
+                                Border.all(color: Colors.black, width: 0.2.w),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.r)),
                           ),
-                        ),
+                          alignment: Alignment.center,
+                          child: Text(ranks.baekList[2].tier),
+                        )
                       ],
                     ),
                   ),
@@ -260,22 +267,12 @@ class _RankviewState extends State<BaekRank> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "My Rank",
+                  "Rank",
                   style: TextStyle(
                       fontSize: 18.sp,
                       fontFamily: "Roboto",
                       color: Colors.black),
                 ),
-                SizedBox(
-                  width: 10.w,
-                ),
-                Text(
-                  "NO.${widget.myRank}",
-                  style: TextStyle(
-                      fontSize: 23.sp,
-                      fontFamily: "Roboto",
-                      color: CommonColor.blue),
-                )
               ],
             ),
           ),
@@ -338,7 +335,6 @@ List<Widget> makeRankList(
   List<Widget> results = [];
 
   for (var i = 3; i < ranks.length; i++) {
-    int rankcolor = colorSelect(ranks[i].rank);
     results.add(Padding(
       padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 13.h),
       child: Container(
@@ -348,7 +344,7 @@ List<Widget> makeRankList(
           color: 7 == myRank
               ? const Color.fromARGB(255, 175, 177, 179).withOpacity(0.4)
               : Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(5.r)),
+          borderRadius: BorderRadius.all(Radius.circular(20.r)),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),
@@ -378,10 +374,8 @@ List<Widget> makeRankList(
                         ),
                       )),
                   ranks[i].profile == "true"
-                      ? Container(
-                          margin: EdgeInsets.only(right: 10.w),
-                          height: 40.h,
-                          width: 40.w,
+                      ? Padding(
+                          padding: EdgeInsets.only(right: 10.w),
                           child: Icon(
                             Icons.account_circle,
                             color: Colors.grey,
@@ -428,24 +422,15 @@ List<Widget> makeRankList(
                   Column(
                     children: [
                       Container(
-                          alignment: Alignment.center,
-                          height: 20.h,
-                          width: 20.w,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.redAccent.withOpacity(0.9))),
-                      SizedBox(
-                        height: 2.h,
-                      ),
-                      Container(
-                          width: 80.w,
-                          alignment: Alignment.center,
-                          child: Text(
-                            "(${ranks[i].exp}/6000)",
-                            style: TextStyle(
-                              fontSize: 8.sp,
-                            ),
-                          ))
+                        width: 70.w,
+                        height: 30.h,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.black, width: 0.2.w),
+                          borderRadius: BorderRadius.all(Radius.circular(30.r)),
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(ranks[i].tier),
+                      )
                     ],
                   )
                 ],
@@ -457,7 +442,8 @@ List<Widget> makeRankList(
                 animation: true,
                 lineHeight: 2.h,
                 animationDuration: 2000,
-                percent: 0.85,
+                percent: ranks[i].exp / ranks[i].maxrating,
+                // ignore: deprecated_member_use
                 linearStrokeCap: LinearStrokeCap.roundAll,
                 progressColor: Colors.greenAccent,
               ),
