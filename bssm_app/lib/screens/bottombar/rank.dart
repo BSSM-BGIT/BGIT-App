@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:badges/badges.dart';
 import 'package:bssm_app/common/common.dart';
 import 'package:bssm_app/provider/ispressed.dart';
+import 'package:bssm_app/screens/bsm/webview.dart';
 import 'package:bssm_app/screens/github/github_webview.dart';
 import 'package:bssm_app/widgets/baekjoon_rank_view.dart';
 import 'package:bssm_app/widgets/github_rank_view.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:quickalert/quickalert.dart';
 
 class Rank extends StatefulWidget {
   const Rank({Key? key}) : super(key: key);
@@ -29,10 +31,29 @@ class _RankState extends State<Rank> {
   double opacity2 = 1;
   bool loading = false;
   final _idController = TextEditingController();
+  // ignore: prefer_typing_uninitialized_variables
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      var pressed = Provider.of<Pressed>(context, listen: false);
+      pressed.bsmispressed ? print("실행") : showAlert();
+    });
+  }
+
+  void showAlert() {
+    QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: 'BSM 로그인',
+        text: '서비스를 이용하실수 있습니다',
+        confirmBtnText: '확인',
+        onConfirmBtnTap: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => const Webview()));
+        });
   }
 
   int count = 0;
@@ -408,7 +429,7 @@ class _RankState extends State<Rank> {
                     AnimatedOpacity(
                         opacity: opacity1,
                         duration: const Duration(microseconds: 1000000),
-                        child: BaekRank(myRank:myRank)),
+                        child: BaekRank(myRank: myRank)),
                     AnimatedOpacity(
                       opacity: opacity2,
                       duration: const Duration(microseconds: 1000000),

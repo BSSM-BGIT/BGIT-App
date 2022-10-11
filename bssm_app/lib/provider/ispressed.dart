@@ -7,6 +7,7 @@ class Pressed extends ChangeNotifier {
   bool _bsmispressed = false;
   bool _githubispressed = false;
   bool _baekjoonispressed = false;
+  
   String _accessToken = "";
 
   String get accessToken => _accessToken;
