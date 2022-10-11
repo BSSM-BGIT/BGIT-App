@@ -15,6 +15,28 @@ class BaekRank extends StatefulWidget {
 }
 
 class _RankviewState extends State<BaekRank> {
+  int tierColor(String tier) {
+    if (tier == "Unrated") {
+      return 0xff000000;
+    } else if (tier.contains("Bronze")) {
+      return 0xffdb6c00;
+    } else if (tier.contains("Silver")) {
+      return 0xff54789a;
+    } else if (tier.contains("Gold")) {
+      return 0xffffc300;
+    } else if (tier.contains("Platinum")) {
+      return 0xff25d69b;
+    } else if (tier.contains("Diamond")) {
+      return 0xff00e4ff;
+    } else if (tier.contains("Ruby")) {
+      return 0xffff0068;
+    } else if (tier.contains("Platinum")) {
+      return 0xff9641d6;
+    }
+
+    return 0xff000000;
+  }
+
   @override
   Widget build(BuildContext context) {
     var ranks = Provider.of<BaekRanks>(context, listen: false);
@@ -39,7 +61,8 @@ class _RankviewState extends State<BaekRank> {
                     decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
+                            color: Color(tierColor(ranks.baekList[1].tier))
+                                .withOpacity(0.2),
                             spreadRadius: 0,
                             blurRadius: 5.0,
                             offset:
@@ -47,8 +70,11 @@ class _RankviewState extends State<BaekRank> {
                           ),
                         ],
                         color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(5.r))),
+                        borderRadius: BorderRadius.all(Radius.circular(5.r)),
+                        border: Border.all(
+                            color: Color(tierColor(ranks.baekList[1].tier)))),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         ranks.baekList[1].profile == "true"
@@ -90,9 +116,6 @@ class _RankviewState extends State<BaekRank> {
                             color: Colors.grey.withOpacity(0.8),
                           ),
                         ),
-                        SizedBox(
-                          height: 9.h,
-                        ),
                         Container(
                           width: 60.w,
                           height: 20.h,
@@ -104,7 +127,20 @@ class _RankviewState extends State<BaekRank> {
                           ),
                           alignment: Alignment.center,
                           child: Text(ranks.baekList[1].tier),
-                        )
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: LinearPercentIndicator(
+                            animation: true,
+                            lineHeight: 2.h,
+                            animationDuration: 2000,
+                            percent: ranks.baekList[1].exp /
+                                ranks.baekList[1].maxrating,
+                            // ignore: deprecated_member_use
+                            linearStrokeCap: LinearStrokeCap.roundAll,
+                            progressColor: Colors.greenAccent,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -115,16 +151,20 @@ class _RankviewState extends State<BaekRank> {
                   decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.4),
+                          color: Color(tierColor(ranks.baekList[0].tier))
+                              .withOpacity(0.4),
                           spreadRadius: 0,
                           blurRadius: 5.0,
                           offset: Offset(0, 3.h), // changes position of shadow
                         ),
                       ],
                       color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(5.r))),
+                      borderRadius: BorderRadius.all(Radius.circular(5.r)),
+                      border: Border.all(
+                          color: Color(tierColor(ranks.baekList[0].tier)))),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ranks.baekList[0].profile == "true"
                           ? Container(
@@ -164,9 +204,6 @@ class _RankviewState extends State<BaekRank> {
                           color: Colors.grey.withOpacity(0.8),
                         ),
                       ),
-                      SizedBox(
-                        height: 15.h,
-                      ),
                       Container(
                         width: 80.w,
                         height: 30.h,
@@ -176,7 +213,20 @@ class _RankviewState extends State<BaekRank> {
                         ),
                         alignment: Alignment.center,
                         child: Text(ranks.baekList[0].tier),
-                      )
+                      ),
+                      SizedBox(
+                        width: double.infinity,
+                        child: LinearPercentIndicator(
+                          animation: true,
+                          lineHeight: 2.h,
+                          animationDuration: 2000,
+                          percent: ranks.baekList[0].exp /
+                              ranks.baekList[0].maxrating,
+                          // ignore: deprecated_member_use
+                          linearStrokeCap: LinearStrokeCap.roundAll,
+                          progressColor: Colors.greenAccent,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -188,7 +238,8 @@ class _RankviewState extends State<BaekRank> {
                     decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.2),
+                            color: Color(tierColor(ranks.baekList[1].tier))
+                                .withOpacity(0.2),
                             spreadRadius: 0,
                             blurRadius: 5.0,
                             offset:
@@ -196,8 +247,11 @@ class _RankviewState extends State<BaekRank> {
                           ),
                         ],
                         color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(5.r))),
+                        borderRadius: BorderRadius.all(Radius.circular(5.r)),
+                        border: Border.all(
+                            color: Color(tierColor(ranks.baekList[0].tier)))),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         ranks.baekList[2].profile == "true"
@@ -238,9 +292,6 @@ class _RankviewState extends State<BaekRank> {
                             fontFamily: "Roboto",
                           ),
                         ),
-                        SizedBox(
-                          height: 9.h,
-                        ),
                         Container(
                           width: 60.w,
                           height: 20.h,
@@ -252,7 +303,20 @@ class _RankviewState extends State<BaekRank> {
                           ),
                           alignment: Alignment.center,
                           child: Text(ranks.baekList[2].tier),
-                        )
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          child: LinearPercentIndicator(
+                            animation: true,
+                            lineHeight: 2.h,
+                            animationDuration: 2000,
+                            percent: ranks.baekList[2].exp /
+                                ranks.baekList[2].maxrating,
+                            // ignore: deprecated_member_use
+                            linearStrokeCap: LinearStrokeCap.roundAll,
+                            progressColor: Colors.greenAccent,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -333,10 +397,32 @@ class _RankviewState extends State<BaekRank> {
 List<Widget> makeRankList(
     BuildContext context, List<BaekjoonRanklist> ranks, int myRank) {
   List<Widget> results = [];
+  int tierColor(String tier) {
+    print(tier);
+    if (tier == "Unrated") {
+      return 0xff000000;
+    } else if (tier.contains("Bronze")) {
+      return 0xffdb6c00;
+    } else if (tier.contains("Silver")) {
+      return 0xff54789a;
+    } else if (tier.contains("Gold")) {
+      return 0xffffc300;
+    } else if (tier.contains("Platinum")) {
+      return 0xff25d69b;
+    } else if (tier.contains("Diamond")) {
+      return 0xff00e4ff;
+    } else if (tier.contains("Ruby")) {
+      return 0xffff0068;
+    } else if (tier.contains("Platinum")) {
+      return 0xff9641d6;
+    }
+
+    return 0xff000000;
+  }
 
   for (var i = 3; i < ranks.length; i++) {
     results.add(Padding(
-      padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 13.h),
+      padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 15.h),
       child: Container(
         width: double.infinity,
         height: 75.h,
@@ -347,10 +433,10 @@ List<Widget> makeRankList(
           borderRadius: BorderRadius.all(Radius.circular(20.r)),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 2,
+              color: Color(tierColor(ranks[i].tier)).withOpacity(0.2),
+              spreadRadius: 3,
               blurRadius: 7,
-              offset: Offset(0, 2.h), // changes position of shadow
+              offset: Offset(0, 3.h), // changes position of shadow
             ),
           ],
         ),
@@ -454,18 +540,4 @@ List<Widget> makeRankList(
     ));
   }
   return results;
-}
-
-int colorSelect(int rank) {
-  int rankColor;
-  if (rank == 1) {
-    rankColor = 0xffFF3B5A;
-  } else if (rank == 2) {
-    rankColor = 0xffFF6A00;
-  } else if (rank == 3) {
-    rankColor = 0xffE6DA44;
-  } else {
-    rankColor = 0xffFFFFFFF;
-  }
-  return rankColor;
 }
