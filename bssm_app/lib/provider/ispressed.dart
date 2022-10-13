@@ -7,13 +7,17 @@ class Pressed extends ChangeNotifier {
   bool _bsmispressed = false;
   bool _githubispressed = false;
   bool _baekjoonispressed = false;
-  
+  bool _githubauth = false;
+  bool _bojauth = false;
+
   String _accessToken = "";
 
   String get accessToken => _accessToken;
   bool get bsmispressed => _bsmispressed;
   bool get githubispressed => _githubispressed;
   bool get baekjoonispressed => _baekjoonispressed;
+  bool get githubauth => _githubauth;
+  bool get bojauth => _bojauth;
 
   void bsmchange() {
     _bsmispressed = true;
@@ -27,6 +31,16 @@ class Pressed extends ChangeNotifier {
 
   void githubchange() {
     _githubispressed = true;
+    notifyListeners();
+  }
+
+  void gitchange() {
+    _githubauth = true;
+    notifyListeners();
+  }
+
+  void bojchange() {
+    _bojauth = true;
     notifyListeners();
   }
 
