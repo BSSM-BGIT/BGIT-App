@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:bssm_app/common/common.dart';
-import 'package:bssm_app/data/Network.dart';
 import 'package:bssm_app/provider/ispressed.dart';
 import 'package:bssm_app/screens/bsm/bsm_loginsuccess.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -35,20 +35,34 @@ class _WebviewState extends State<Webview> {
   }
 
   _postRequest(var pressed) async {
+    var parsingData;
     String url = 'http://52.79.57.84:8080/auth/oauth/bsm';
-    Network network = Network(url, code);
+    http.Response response =
+        await http.post(Uri.parse(url), headers: <String, String>{
+      'authCode': code,
+    });
+    print(code);
+    int statuscode = response.statusCode;
+    try {
+      if (statuscode == 200) {
+        String jsonData = response.body;
+        parsingData = jsonDecode(jsonData);
+        accessToken = parsingData['accessToken'];
+        // ignore: avoid_print
+        print("22222222222222222221222222222222222222222222222222222222");
+        // ignore: avoid_print
+        print(accessToken);
+        pressed = pressed.inputaccesstoken(accessToken);
 
-    var bsmData = await network.getJsonData();
-    accessToken = bsmData['accessToken'];
-    // ignore: avoid_print
-    print("22222222222222222221222222222222222222222222222222222222");
-      // ignore: avoid_print
-    print(accessToken);
-    pressed = pressed.inputaccesstoken(accessToken);
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => const BsmSuccess()));
+        // return parsingData;
+      }
+    } catch (e) {
+      print(e);
+    }
 
-    // ignore: use_build_context_synchronously
-    Navigator.push(
-        context, MaterialPageRoute(builder: (_) => const BsmSuccess()));
     // http.Response response = await http.post(
     //   Uri.parse(url),
     //   headers: <String, String>{
@@ -81,12 +95,10 @@ class _WebviewState extends State<Webview> {
                   });
                   _postRequest(pressed);
                   pressed.bsmchange();
-                  
+
                   // do not navigate
                   return NavigationDecision.prevent;
-                } else if (request.url.contains(url)) {
-                  
-                }
+                } else if (request.url.contains(url)) {}
 
                 return NavigationDecision.navigate;
               },
