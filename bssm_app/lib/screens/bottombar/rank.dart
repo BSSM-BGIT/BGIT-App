@@ -21,7 +21,6 @@ class Rank extends StatefulWidget {
 }
 
 class _RankState extends State<Rank> {
-  int myRank = 8;
   bool ispressed1 = true;
   bool ispressed2 = false;
   int textSize1 = 24;
@@ -36,7 +35,6 @@ class _RankState extends State<Rank> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
     WidgetsBinding.instance.addPostFrameCallback((_) {
       var pressed = Provider.of<Pressed>(context, listen: false);
       pressed.bsmispressed ? print("실행") : showAlert();
@@ -48,7 +46,8 @@ class _RankState extends State<Rank> {
         context: context,
         type: QuickAlertType.error,
         title: 'BSM 로그인',
-        text: '서비스를 이용하실수 있습니다',
+        text: '앱을 사용하기전에 로그인을 해주세요',
+        barrierDismissible: false,
         confirmBtnText: '확인',
         onConfirmBtnTap: () {
           Navigator.push(
@@ -62,10 +61,12 @@ class _RankState extends State<Rank> {
   //백준 인증
   void postequest(String access, var pressed) async {
     String url = 'http://52.79.57.84:8080/auth/boj';
+    print(access);
     http.Response response =
         await http.post(Uri.parse(url), headers: <String, String>{
       'ACCESS-TOKEN': access,
     });
+    print(response.body);
     print('실행되었습ㄴ디ㅏ');
     print(response.statusCode);
     if (response.statusCode == 200) {
@@ -299,52 +300,57 @@ class _RankState extends State<Rank> {
                               color: Colors.black),
                         ),
                       ),
-                      ispressed1
-                          ? pressed.githubispressed
+                      ispressed1 //만약 깃허브를 클릭했다면
+                          ? pressed.githubauth //만약 깃허브를 이미 했다면
                               ? const Icon(null)
-                              : Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 15.h, bottom: 3.h),
-                                  child: Badge(
-                                    badgeContent: const Text(
-                                      "!",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    badgeColor: CommonColor.blue,
-                                    child: InkWell(
-                                        onTap: () {
-                                          showDialog1(
-                                              pressed.accessToken, pressed);
-                                        },
-                                        child: Image.asset(
-                                          "images/github.png",
-                                          scale: 19.r,
-                                        )),
-                                  ),
-                                )
-                          : pressed.baekjoonispressed
-                              ? const Icon(null)
-                              : Padding(
-                                  padding:
-                                      EdgeInsets.only(top: 15.h, bottom: 3.h),
-                                  child: Badge(
-                                    badgeContent: const Text(
-                                      "!",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    badgeColor: CommonColor.blue,
-                                    child: InkWell(
-                                      onTap: () {
-                                        showDialog1(
-                                            pressed.accessToken, pressed);
-                                      },
-                                      child: Image.asset(
-                                        "images/baekjoon.png",
-                                        scale: 12.r,
+                              : pressed.githubispressed //만약 github인증을 방금한 다음이라면
+                                  ? const Icon(null)
+                                  : Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 15.h, bottom: 3.h),
+                                      child: Badge(
+                                        badgeContent: const Text(
+                                          "!",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        badgeColor: CommonColor.blue,
+                                        child: InkWell(
+                                            onTap: () {
+                                              showDialog1(
+                                                  pressed.accessToken, pressed);
+                                            },
+                                            child: Image.asset(
+                                              "images/github.png",
+                                              scale: 19.r,
+                                            )),
                                       ),
-                                    ),
-                                  ),
-                                )
+                                    )
+                          : pressed.bojauth //만약 백준인증을 했다면
+                              ? const Icon(null)
+                              : pressed.baekjoonispressed //만약 백준인증을 방금 했다면
+
+                                  ? const Icon(null)
+                                  : Padding(
+                                      padding: EdgeInsets.only(
+                                          top: 15.h, bottom: 3.h),
+                                      child: Badge(
+                                        badgeContent: const Text(
+                                          "!",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        badgeColor: CommonColor.blue,
+                                        child: InkWell(
+                                          onTap: () {
+                                            showDialog1(
+                                                pressed.accessToken, pressed);
+                                          },
+                                          child: Image.asset(
+                                            "images/baekjoon.png",
+                                            scale: 12.r,
+                                          ),
+                                        ),
+                                      ),
+                                    )
                     ],
                   ),
                 ),
@@ -429,11 +435,11 @@ class _RankState extends State<Rank> {
                     AnimatedOpacity(
                         opacity: opacity1,
                         duration: const Duration(microseconds: 1000000),
-                        child: BaekRank(myRank: myRank)),
+                        child: const BaekRank()),
                     AnimatedOpacity(
                       opacity: opacity2,
                       duration: const Duration(microseconds: 1000000),
-                      child: GithubRank(myRank: myRank),
+                      child: const GithubRank(),
                     ),
                   ],
                 ),
