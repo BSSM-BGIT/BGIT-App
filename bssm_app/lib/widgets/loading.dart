@@ -1,7 +1,6 @@
 import 'package:bssm_app/common/common.dart';
 import 'package:bssm_app/provider/baekjoonranks.dart';
 import 'package:bssm_app/provider/githubranks.dart';
-import 'package:bssm_app/screens/bottombar/bottom.dart';
 import 'package:bssm_app/screens/bottombar/rank.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -34,7 +33,6 @@ class _LoadingState extends State<Loading> {
     _getRequest1();
     _getRequest2();
   }
-
 
   Future<void> _getRequest1() async {
     String url = 'http://52.79.57.84:8080/user/git';
@@ -193,8 +191,7 @@ class _LoadingState extends State<Loading> {
       //오류 발생 코드
     }
     // ignore: use_build_context_synchronously
-    Navigator.push(
-        context, MaterialPageRoute(builder: (_) => const Rank()));
+    Navigator.push(context, MaterialPageRoute(builder: (_) => const Rank()));
   }
 
   @override
