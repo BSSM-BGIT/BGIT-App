@@ -7,8 +7,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class BaekRank extends StatefulWidget {
-  final int myRank;
-  const BaekRank({Key? key, required this.myRank}) : super(key: key);
+  const BaekRank({Key? key}) : super(key: key);
 
   @override
   State<BaekRank> createState() => _RankviewState();
@@ -353,12 +352,16 @@ class _RankviewState extends State<BaekRank> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Rank",
-                      style: TextStyle(
-                        fontSize: 15.sp,
-                        color: Colors.white,
-                        fontFamily: "Roboto",
+                    
+                    Padding(
+                      padding: EdgeInsets.only(left: 10.w),
+                      child: Text(
+                        "Rank",
+                        style: TextStyle(
+                          fontSize: 15.sp,
+                          color: Colors.white,
+                          fontFamily: "Roboto",
+                        ),
                       ),
                     ),
                     Text(
@@ -370,7 +373,7 @@ class _RankviewState extends State<BaekRank> {
                       ),
                     ),
                     SizedBox(
-                      width: 15.w,
+                      width: 13.w,
                     ),
                     Text(
                       "Tier/Exp",
@@ -386,7 +389,7 @@ class _RankviewState extends State<BaekRank> {
             ),
           ),
           Column(
-            children: makeRankList(context, ranks.baekList, widget.myRank),
+            children: makeRankList(context, ranks.baekList),
           )
         ],
       ),
@@ -394,8 +397,7 @@ class _RankviewState extends State<BaekRank> {
   }
 }
 
-List<Widget> makeRankList(
-    BuildContext context, List<BaekjoonRanklist> ranks, int myRank) {
+List<Widget> makeRankList(BuildContext context, List<BaekjoonRanklist> ranks) {
   List<Widget> results = [];
   int tierColor(String tier) {
     print(tier);
@@ -427,9 +429,7 @@ List<Widget> makeRankList(
         width: double.infinity,
         height: 75.h,
         decoration: BoxDecoration(
-          color: 7 == myRank
-              ? const Color.fromARGB(255, 175, 177, 179).withOpacity(0.4)
-              : Colors.white,
+          color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(20.r)),
           boxShadow: [
             BoxShadow(
@@ -447,17 +447,19 @@ List<Widget> makeRankList(
               padding: EdgeInsets.only(top: 14.h),
               child: Row(
                 children: [
-                  Padding(
-                      padding: EdgeInsets.only(left: 23.w, bottom: 14.h),
-                      child: SizedBox(
-                        width: 40.w,
-                        child: Text(
-                          "${ranks[i].rank}",
-                          style: TextStyle(
-                              color: CommonColor.blue,
-                              fontSize: 30.sp,
-                              fontWeight: FontWeight.w500),
-                        ),
+                  SizedBox(
+                      width: 80.w,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "${ranks[i].rank}",
+                            style: TextStyle(
+                                color: CommonColor.blue,
+                                fontSize: 30.sp,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ],
                       )),
                   ranks[i].profile == "true"
                       ? Padding(
