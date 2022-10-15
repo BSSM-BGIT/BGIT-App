@@ -6,8 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class GithubRank extends StatefulWidget {
-  final int myRank;
-  const GithubRank({Key? key, required this.myRank}) : super(key: key);
+  const GithubRank({Key? key}) : super(key: key);
 
   @override
   State<GithubRank> createState() => _RankviewState();
@@ -253,12 +252,15 @@ class _RankviewState extends State<GithubRank> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Rank",
-                      style: TextStyle(
-                        fontSize: 15.sp,
-                        color: Colors.white,
-                        fontFamily: "Roboto",
+                    Padding(
+                      padding: EdgeInsets.only(left: 10.w),
+                      child: Text(
+                        "Rank",
+                        style: TextStyle(
+                          fontSize: 15.sp,
+                          color: Colors.white,
+                          fontFamily: "Roboto",
+                        ),
                       ),
                     ),
                     Text(
@@ -286,7 +288,7 @@ class _RankviewState extends State<GithubRank> {
             ),
           ),
           Column(
-            children: makeRankList(context, ranks.gitList, widget.myRank),
+            children: makeRankList(context, ranks.gitList),
           )
         ],
       ),
@@ -294,8 +296,7 @@ class _RankviewState extends State<GithubRank> {
   }
 }
 
-List<Widget> makeRankList(
-    BuildContext context, List<GitRanklist> ranks, int myRank) {
+List<Widget> makeRankList(BuildContext context, List<GitRanklist> ranks) {
   List<Widget> results = [];
 
   for (var i = 3; i < ranks.length; i++) {
@@ -305,9 +306,7 @@ List<Widget> makeRankList(
         width: double.infinity,
         height: 75.h,
         decoration: BoxDecoration(
-          color: ranks[i].rank == myRank
-              ? const Color.fromARGB(255, 175, 177, 179).withOpacity(0.4)
-              : Colors.white,
+          color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(20.r)),
           boxShadow: [
             BoxShadow(
@@ -321,15 +320,19 @@ List<Widget> makeRankList(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Padding(
-                padding: EdgeInsets.only(
-                    left: 23.w, right: 23.w, top: 10.h, bottom: 10.h),
-                child: Text(
-                  "${ranks[i].rank}",
-                  style: TextStyle(
-                      color: CommonColor.blue,
-                      fontSize: 30.sp,
-                      fontWeight: FontWeight.w500),
+            SizedBox(
+                width: 80.w,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "${ranks[i].rank}",
+                      style: TextStyle(
+                          color: CommonColor.blue,
+                          fontSize: 30.sp,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ],
                 )),
             Container(
               margin: EdgeInsets.only(bottom: 5.h, right: 8.w),
