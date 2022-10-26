@@ -36,18 +36,20 @@ class _WebviewState extends State<Webview> {
 
   _postRequest(var pressed) async {
     var parsingData;
-    String url = 'http://52.79.57.84:8080/auth/oauth/bsm';
+    print("postrequest 실행");
+    String url = 'http://52.78.155.216:8080/auth/oauth/bsm';
     http.Response response =
         await http.post(Uri.parse(url), headers: <String, String>{
       'authCode': code,
     });
-    print(code);
+    print("111111111111111111111$code");
     int statuscode = response.statusCode;
-    try {
+    print(statuscode);
       if (statuscode == 200) {
-        String jsonData = response.body;
-        parsingData = jsonDecode(jsonData);
-        accessToken = parsingData['accessToken'];
+        var parsingData = jsonDecode(utf8.decode(response.bodyBytes));
+        print("parsingData = $parsingData");
+        accessToken = parsingData['accessToken']['value'];
+        
         // ignore: avoid_print
         print("22222222222222222221222222222222222222222222222222222222");
         // ignore: avoid_print
@@ -59,9 +61,7 @@ class _WebviewState extends State<Webview> {
             context, MaterialPageRoute(builder: (_) => const BsmSuccess()));
         // return parsingData;
       }
-    } catch (e) {
-      print(e);
-    }
+    
 
     // http.Response response = await http.post(
     //   Uri.parse(url),
@@ -85,7 +85,7 @@ class _WebviewState extends State<Webview> {
           ? Center(child: SpinKitWave(color: CommonColor.blue))
           : WebView(
               initialUrl:
-                  'https://bssm.kro.kr/oauth/login?clientId=4c81669f&redirectURI=https://bgit.bssm.kro.kr/oauth/bsm',
+                  'https://auth.bssm.kro.kr/oauth?clientId=4c81669f&redirectURI=https://bgit.bssm.kro.kr/oauth/bsm',
               javascriptMode: JavascriptMode.unrestricted,
               navigationDelegate: (NavigationRequest request) {
                 if (request.url.contains("?code=")) {
