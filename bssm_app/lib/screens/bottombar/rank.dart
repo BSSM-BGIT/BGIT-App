@@ -192,16 +192,12 @@ class _RankState extends State<Rank> {
         });
   }
 
-  void showDialog1(String accessToken, var pressed) {
+   void showDialog3() {
     Dialogs.materialDialog(
       barrierDismissible: false,
       color: Colors.white,
-      msg: '간편하게 등록 해보세요',
-      title: ispressed1 ? 'github 로그인' : 'baekjoon 로그인',
-      lottieBuilder: Lottie.asset(
-        'assets/dialog.json',
-        fit: BoxFit.contain,
-      ),
+      title: '앱에서는 지원되지 않는 기능입니다',
+      
       context: context,
       actions: [
         ElevatedButton(
@@ -211,7 +207,47 @@ class _RankState extends State<Rank> {
           style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
           child: Padding(
             padding: EdgeInsets.only(left: 10.w, right: 10.w),
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center, 
+              children: [
+              Text(
+                "확인",
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500),
+              )
+            ]),
+          ),
+        ),
+      ]
+    );
+  }
+
+  void showDialog1(String accessToken, var pressed) {
+    Dialogs.materialDialog(
+      barrierDismissible: false,
+      color: Colors.white,
+      msg: ispressed1 ? '간편하게 등록 해보세요' : null,
+      title: ispressed1 ? 'github 로그인' : '앱에서는 지원되지 않는 기능입니다',
+      lottieBuilder: ispressed1
+          ? Lottie.asset(
+              'assets/dialog.json',
+              fit: BoxFit.contain,
+            )
+          : null,
+      context: context,
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+          child: Padding(
+            padding: EdgeInsets.only(left: 10.w, right: 10.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center, 
+              children: [
               Text(
                 "취소",
                 style: TextStyle(
@@ -222,7 +258,7 @@ class _RankState extends State<Rank> {
             ]),
           ),
         ),
-        ElevatedButton(
+         ElevatedButton(
           onPressed: () {
             ispressed1
                 ? Navigator.push(context,
@@ -255,6 +291,11 @@ class _RankState extends State<Rank> {
         ),
       ],
     );
+  }
+
+  Future<bool> onbackpress() async {
+    print("뒤로가기 실행됨");
+    return false;
   }
 
   @override
@@ -316,8 +357,11 @@ class _RankState extends State<Rank> {
                                         badgeColor: CommonColor.blue,
                                         child: InkWell(
                                             onTap: () {
-                                              showDialog1(
-                                                  pressed.accessToken, pressed);
+                                              pressed.bsmispressed
+                                                  ? showDialog1(
+                                                      pressed.accessToken,
+                                                      pressed)
+                                                  : showAlert();
                                             },
                                             child: Image.asset(
                                               "images/github.png",
@@ -341,8 +385,9 @@ class _RankState extends State<Rank> {
                                         badgeColor: CommonColor.blue,
                                         child: InkWell(
                                           onTap: () {
-                                            showDialog1(
-                                                pressed.accessToken, pressed);
+                                            pressed.bsmispressed
+                                                  ? showDialog3()
+                                                  : showAlert();
                                           },
                                           child: Image.asset(
                                             "images/baekjoon.png",
@@ -425,25 +470,28 @@ class _RankState extends State<Rank> {
             elevation: 1.0,
           ),
         ),
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Center(
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    AnimatedOpacity(
-                        opacity: opacity1,
+        body: WillPopScope(
+          onWillPop: onbackpress,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Center(
+              child: Column(
+                children: [
+                  Stack(
+                    children: [
+                      AnimatedOpacity(
+                          opacity: opacity1,
+                          duration: const Duration(microseconds: 1000000),
+                          child: const BaekRank()),
+                      AnimatedOpacity(
+                        opacity: opacity2,
                         duration: const Duration(microseconds: 1000000),
-                        child: const BaekRank()),
-                    AnimatedOpacity(
-                      opacity: opacity2,
-                      duration: const Duration(microseconds: 1000000),
-                      child: const GithubRank(),
-                    ),
-                  ],
-                ),
-              ],
+                        child: const GithubRank(),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
