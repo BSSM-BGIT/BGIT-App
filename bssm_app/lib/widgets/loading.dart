@@ -28,19 +28,22 @@ class _LoadingState extends State<Loading> {
       ranks1 = Provider.of<GitRanks>(context, listen: false);
       ranks2 = Provider.of<BaekRanks>(context, listen: false);
     });
-
-    super.initState();
     _getRequest1();
     _getRequest2();
+    super.initState();
   }
 
   Future<void> _getRequest1() async {
-    String url = 'http://52.79.57.84:8080/user/git';
+    print("gitstart");
+
+    String url = 'http://52.78.155.216:8080/user/git';
     http.Response response = await http.get(Uri.parse(url));
+    print(response.body);
+    print(response.statusCode);
     if (response.statusCode == 200) {
       var parsingData = jsonDecode(utf8.decode(response.bodyBytes));
       int count = parsingData['count'];
-
+      ranks1.clearly();
       for (int i = 0; i < count; i++) {
         bool isnull = false;
         String id = "";
@@ -52,9 +55,11 @@ class _LoadingState extends State<Loading> {
         githubImg = parsingData['data'][i]['githubImg'];
         name = parsingData['data'][i]['user']['name'];
         commit = parsingData['data'][i]['commits'];
+
         if (parsingData['data'][i]['githubImg'] == null) {
           isnull = true;
         }
+        print("success1");
         ranks1.add(i, githubImg, id, name, commit, isnull);
       }
     } else {
@@ -63,12 +68,16 @@ class _LoadingState extends State<Loading> {
   }
 
   Future<void> _getRequest2() async {
-    String url = 'http://52.79.57.84:8080/user/boj';
+    print("boj start");
+    String url = 'http://52.78.155.216:8080/user/boj';
     http.Response response = await http.get(Uri.parse(url));
+    print(response.body);
+    print(response.statusCode);
     if (response.statusCode == 200) {
       var parsingData = jsonDecode(utf8.decode(response.bodyBytes));
-      int count = parsingData['count'];
 
+      int count = parsingData['count'];
+      ranks2.clearly();
       for (int i = 0; i < count; i++) {
         bool isnull = false;
         String img = "";
@@ -185,10 +194,11 @@ class _LoadingState extends State<Loading> {
           isnull = true;
         }
 
+        print("success2");
         ranks2.add(i, isnull ? "true" : img, id, name, tier, rating, maxrating);
       }
     } else {
-      //오류 발생 코드
+      print("error");
     }
     // ignore: use_build_context_synchronously
     Navigator.push(context, MaterialPageRoute(builder: (_) => const Rank()));
