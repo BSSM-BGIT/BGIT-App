@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
         builder: (BuildContext context, Widget? child) => const MaterialApp(
             title: 'BSSM_Git',
             debugShowCheckedModeBanner: false,
-            home: Loading()),
+            home: Loading()), 
       ),
     );
   }
