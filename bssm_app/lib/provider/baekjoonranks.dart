@@ -9,7 +9,13 @@ class BaekRanks extends ChangeNotifier {
 
   void add(int rank, String profile, String userName, String name, String tier,
       int exp, int maxrating) {
-    baekList.add(BaekjoonRanklist(rank, profile, userName, name, tier, exp, maxrating));
+    baekList.add(
+        BaekjoonRanklist(rank, profile, userName, name, tier, exp, maxrating));
     notifyListeners();
+  }
+
+  void clearly() {
+    baekList.clear();
+    notifyListeners();  
   }
 }

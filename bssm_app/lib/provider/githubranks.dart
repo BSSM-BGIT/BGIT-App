@@ -7,8 +7,14 @@ class GitRanks extends ChangeNotifier {
 
   List<GitRanklist> get gitList => _gitList;
 
-  void add(int rank, String profile, String userName, String name, int commit, bool isnull) {
+  void add(int rank, String profile, String userName, String name, int commit,
+      bool isnull) {
     gitList.add(GitRanklist(rank, profile, userName, name, commit, isnull));
     notifyListeners();
+  }
+
+  void clearly() {
+    gitList.clear();
+    notifyListeners();  
   }
 }
