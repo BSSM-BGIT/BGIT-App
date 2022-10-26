@@ -61,11 +61,11 @@ class _RankviewState extends State<BaekRank> {
                         boxShadow: [
                           BoxShadow(
                             color: Color(tierColor(ranks.baekList[1].tier))
-                                .withOpacity(0.2),
-                            spreadRadius: 0,
-                            blurRadius: 5.0,
+                                .withOpacity(0.3),
+                            spreadRadius: 1,
+                            blurRadius: 6.0,
                             offset:
-                                Offset(0, 2.h), // changes position of shadow
+                                Offset(0, 3.h), // changes position of shadow
                           ),
                         ],
                         color: Colors.white,
@@ -152,8 +152,8 @@ class _RankviewState extends State<BaekRank> {
                         BoxShadow(
                           color: Color(tierColor(ranks.baekList[0].tier))
                               .withOpacity(0.4),
-                          spreadRadius: 0,
-                          blurRadius: 5.0,
+                          spreadRadius: 1,
+                          blurRadius: 6.0,
                           offset: Offset(0, 3.h), // changes position of shadow
                         ),
                       ],
@@ -239,10 +239,10 @@ class _RankviewState extends State<BaekRank> {
                           BoxShadow(
                             color: Color(tierColor(ranks.baekList[1].tier))
                                 .withOpacity(0.2),
-                            spreadRadius: 0,
-                            blurRadius: 5.0,
+                            spreadRadius: 1,
+                            blurRadius: 6.0,
                             offset:
-                                Offset(0, 2.h), // changes position of shadow
+                                Offset(0, 3.h), // changes position of shadow
                           ),
                         ],
                         color: Colors.white,
@@ -424,7 +424,7 @@ List<Widget> makeRankList(BuildContext context, List<BaekjoonRanklist> ranks) {
 
   for (var i = 3; i < ranks.length; i++) {
     results.add(Padding(
-      padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 15.h),
+      padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 13.h),
       child: Container(
         width: double.infinity,
         height: 75.h,
@@ -448,7 +448,7 @@ List<Widget> makeRankList(BuildContext context, List<BaekjoonRanklist> ranks) {
               child: Row(
                 children: [
                   SizedBox(
-                      width: 80.w,
+                      width: 70.w,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -481,7 +481,7 @@ List<Widget> makeRankList(BuildContext context, List<BaekjoonRanklist> ranks) {
                   Padding(
                     padding: EdgeInsets.only(bottom: 5.h),
                     child: SizedBox(
-                      width: 160.w,
+                      width: 145.w,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
