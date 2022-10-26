@@ -321,7 +321,7 @@ List<Widget> makeRankList(BuildContext context, List<GitRanklist> ranks) {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
-                width: 80.w,
+                width: 70.w,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -335,7 +335,7 @@ List<Widget> makeRankList(BuildContext context, List<GitRanklist> ranks) {
                   ],
                 )),
             Container(
-              margin: EdgeInsets.only(bottom: 5.h, right: 8.w),
+              margin: EdgeInsets.only(bottom: 5.h, right: 8.w, left: 8.w),
               height: 40.h,
               width: 40.w,
               decoration: const BoxDecoration(shape: BoxShape.circle),
@@ -347,7 +347,7 @@ List<Widget> makeRankList(BuildContext context, List<GitRanklist> ranks) {
             Padding(
               padding: EdgeInsets.only(bottom: 5.h),
               child: SizedBox(
-                width: 160.w,
+                width: 155.w,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
