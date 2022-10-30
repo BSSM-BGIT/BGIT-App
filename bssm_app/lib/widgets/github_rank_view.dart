@@ -326,7 +326,7 @@ List<Widget> makeRankList(BuildContext context, List<GitRanklist> ranks) {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "${ranks[i].rank}",
+                      "${i+1}",
                       style: TextStyle(
                           color: CommonColor.blue,
                           fontSize: 30.sp,

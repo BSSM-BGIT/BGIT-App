@@ -352,7 +352,6 @@ class _RankviewState extends State<BaekRank> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    
                     Padding(
                       padding: EdgeInsets.only(left: 10.w),
                       child: Text(
@@ -453,7 +452,7 @@ List<Widget> makeRankList(BuildContext context, List<BaekjoonRanklist> ranks) {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "${ranks[i].rank}",
+                            "${i + 1}",
                             style: TextStyle(
                                 color: CommonColor.blue,
                                 fontSize: 30.sp,
