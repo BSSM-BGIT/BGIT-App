@@ -1,18 +1,13 @@
 
-<h1 align="center">
-	<img
-		width="200"
-		alt="The Lounge"
-		src="https://user-images.githubusercontent.com/89582664/203536447-cd6a4ef4-75eb-4156-940b-ee12fe9aa5e1.png">
-</h1>
 
-<h3 align="center">
+
+<h2 align="center">
 	부산소프트웨어마이스터고 재학생들을 위한 깃허브, 백준 랭킹 앱 💫
-</h3>
+</h2>
 
 <p align="center">
 	<strong>
-		<a href="https://www.figma.com/file/CTo92mYXylGBeaXXX7xkef/%EC%9A%A9%EC%A0%9C-%26-%EA%B2%BD%EC%8B%A0?node-id=0%3A1&t=tMn1UqMhsPA6Nj0X-0">Design</a>
+		<a href="https://www.pinterest.co.kr/pin/1010847078835809220/">Design</a>
 		
 
 
@@ -90,7 +85,7 @@ Flutter doctor에서 오류가 난다면 구글링 후 해결
  
 ### 아쉬운점
  - 백준 랭킹 등록에서 이슈가 발생하여 구현하지 못했습니다
-
+<br>
  
  
 ## Git upload Rules
