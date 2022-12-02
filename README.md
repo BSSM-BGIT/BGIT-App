@@ -22,9 +22,9 @@
 
 ## 팀원역할
 
-- **Mobile-FrontEnd** 조용제([Lovingcats]())	
-- **BackEnd** 최원용([wonyongChoi05](https://github.com/wonyongChoi05)), 이현준([leehj050211](https://github.com/leehj050211))
-- **Web** 이현준([leehj050211](https://github.com/leehj050211))
+- **Mobile-FrontEnd** :  조용제([Lovingcats](https://github.com/Lovingcats))	
+- **BackEnd** : 최원용([wonyongChoi05](https://github.com/wonyongChoi05)), 이현준([leehj050211](https://github.com/leehj050211))
+- **Web** : 이현준([leehj050211](https://github.com/leehj050211))
 <br>
 		
 ## 앱 설명
