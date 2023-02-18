@@ -125,7 +125,7 @@ class _RankviewState extends State<BaekRank> {
                                 BorderRadius.all(Radius.circular(30.r)),
                           ),
                           alignment: Alignment.center,
-                          child: Text(ranks.baekList[1].tier),
+                          child: Text(ranks.baekList[1].tier, style: TextStyle(fontSize: 11.sp),),
                         ),
                         SizedBox(
                           width: double.infinity,
@@ -211,7 +211,7 @@ class _RankviewState extends State<BaekRank> {
                           borderRadius: BorderRadius.all(Radius.circular(30.r)),
                         ),
                         alignment: Alignment.center,
-                        child: Text(ranks.baekList[0].tier),
+                        child: Text(ranks.baekList[0].tier, style: TextStyle(fontSize: 11.sp),),
                       ),
                       SizedBox(
                         width: double.infinity,
@@ -301,7 +301,7 @@ class _RankviewState extends State<BaekRank> {
                                 BorderRadius.all(Radius.circular(30.r)),
                           ),
                           alignment: Alignment.center,
-                          child: Text(ranks.baekList[2].tier),
+                          child: Text(ranks.baekList[2].tier, style: TextStyle(fontSize: 11.sp),),
                         ),
                         SizedBox(
                           width: double.infinity,
@@ -516,7 +516,10 @@ List<Widget> makeRankList(BuildContext context, List<BaekjoonRanklist> ranks) {
                           borderRadius: BorderRadius.all(Radius.circular(30.r)),
                         ),
                         alignment: Alignment.center,
-                        child: Text(ranks[i].tier),
+                        child: Text(
+                          ranks[i].tier,
+                          style: TextStyle(fontSize: 15.sp),
+                        ),
                       )
                     ],
                   )
