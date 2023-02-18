@@ -20,7 +20,7 @@ class _BsmSuccessState extends State<BsmSuccess> {
   }
 
   Future<void> _getRequest(var access, var pressed) async {
-    String url = 'http://52.78.155.216:8080/user';
+    String url = 'https://bgit.bssm.kro.kr/api/user';
     print("실행됨");
     print(access);
     http.Response response =
