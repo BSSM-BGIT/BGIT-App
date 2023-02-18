@@ -37,7 +37,7 @@ class _WebviewState extends State<Webview> {
   _postRequest(var pressed) async {
     var parsingData;
     print("postrequest 실행");
-    String url = 'http://52.78.155.216:8080/auth/oauth/bsm';
+    String url = 'https://bgit.bssm.kro.kr/api/auth/oauth/bsm';
     http.Response response =
         await http.post(Uri.parse(url), headers: <String, String>{
       'authCode': code,
