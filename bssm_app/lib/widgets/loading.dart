@@ -36,7 +36,7 @@ class _LoadingState extends State<Loading> {
   Future<void> _getRequest1() async {
     print("gitstart");
 
-    String url = 'http://52.78.155.216:8080/user/git';
+    String url = 'https://bgit.bssm.kro.kr/api/user/git';
     http.Response response = await http.get(Uri.parse(url));
     print(response.body);
     print(response.statusCode);
@@ -69,7 +69,7 @@ class _LoadingState extends State<Loading> {
 
   Future<void> _getRequest2() async {
     print("boj start");
-    String url = 'http://52.78.155.216:8080/user/boj';
+    String url = 'https://bgit.bssm.kro.kr/api/user/boj';
     http.Response response = await http.get(Uri.parse(url));
     print(response.body);
     print(response.statusCode);
