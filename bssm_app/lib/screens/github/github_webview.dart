@@ -38,7 +38,7 @@ class _WebviewState extends State<GithubWebview> {
 
   _postRequest(String access) async {
     accessToken = access;
-    String url = 'http://52.78.155.216:8080/login/oauth/github';
+    String url = 'https://bgit.bssm.kro.kr/api/login/oauth/github';
 
     http.Response response =
         await http.post(Uri.parse(url), headers: <String, String>{
