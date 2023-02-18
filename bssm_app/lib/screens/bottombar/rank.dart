@@ -60,7 +60,7 @@ class _RankState extends State<Rank> {
 
   //백준 인증
   void postequest(String access, var pressed) async {
-    String url = 'http://52.79.57.84:8080/auth/boj';
+    String url = 'https://bgit.bssm.kro.kr/api/auth/boj';
     print(access);
     http.Response response =
         await http.post(Uri.parse(url), headers: <String, String>{
@@ -76,7 +76,7 @@ class _RankState extends State<Rank> {
 
   //백준 코드 발급
   void getRequest(String access, var pressed) async {
-    String url = 'http://52.79.57.84:8080/boj/random';
+    String url = 'https://bgit.bssm.kro.kr/api/boj/random';
     print("111111111111111111111111111");
     print(access);
     http.Response response =
@@ -192,36 +192,33 @@ class _RankState extends State<Rank> {
         });
   }
 
-   void showDialog3() {
+  void showDialog3() {
     Dialogs.materialDialog(
-      barrierDismissible: false,
-      color: Colors.white,
-      title: '앱에서는 지원되지 않는 기능입니다',
-      
-      context: context,
-      actions: [
-        ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
-          child: Padding(
-            padding: EdgeInsets.only(left: 10.w, right: 10.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center, 
-              children: [
-              Text(
-                "확인",
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w500),
-              )
-            ]),
+        barrierDismissible: false,
+        color: Colors.white,
+        title: '앱에서는 지원되지 않는 기능입니다',
+        context: context,
+        actions: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
+            child: Padding(
+              padding: EdgeInsets.only(left: 10.w, right: 10.w),
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text(
+                  "확인",
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w500),
+                )
+              ]),
+            ),
           ),
-        ),
-      ]
-    );
+        ]);
   }
 
   void showDialog1(String accessToken, var pressed) {
@@ -245,9 +242,7 @@ class _RankState extends State<Rank> {
           style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
           child: Padding(
             padding: EdgeInsets.only(left: 10.w, right: 10.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center, 
-              children: [
+            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text(
                 "취소",
                 style: TextStyle(
@@ -258,7 +253,7 @@ class _RankState extends State<Rank> {
             ]),
           ),
         ),
-         ElevatedButton(
+        ElevatedButton(
           onPressed: () {
             ispressed1
                 ? Navigator.push(context,
@@ -327,17 +322,17 @@ class _RankState extends State<Rank> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 120.w),
+                  padding: EdgeInsets.only(left: 100.w),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
                         padding: EdgeInsets.only(top: 16.h),
                         child: Text(
-                          "LEADERBOARD",
+                          "부산SW마이스터고 랭킹",
                           style: TextStyle(
                               fontFamily: 'Roboto',
-                              fontSize: 22.sp,
+                              fontSize: 20.sp,
                               color: Colors.black),
                         ),
                       ),
@@ -386,8 +381,8 @@ class _RankState extends State<Rank> {
                                         child: InkWell(
                                           onTap: () {
                                             pressed.bsmispressed
-                                                  ? showDialog3()
-                                                  : showAlert();
+                                                ? showDialog3()
+                                                : showAlert();
                                           },
                                           child: Image.asset(
                                             "images/baekjoon.png",
@@ -400,7 +395,7 @@ class _RankState extends State<Rank> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 60.w, right: 60.w),
+                  padding: EdgeInsets.only(left: 60.w, right: 60.w, top: 10.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
