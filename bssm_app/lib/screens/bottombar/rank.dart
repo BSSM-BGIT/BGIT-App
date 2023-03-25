@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:badges/badges.dart';
 import 'package:bssm_app/common/common.dart';
 import 'package:bssm_app/provider/ispressed.dart';
 import 'package:bssm_app/screens/bsm/webview.dart';
@@ -12,6 +11,7 @@ import 'package:material_dialogs/material_dialogs.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:quickalert/quickalert.dart';
+import 'package:badges/badges.dart' as badges;
 
 class Rank extends StatefulWidget {
   const Rank({Key? key}) : super(key: key);
@@ -344,12 +344,13 @@ class _RankState extends State<Rank> {
                                   : Padding(
                                       padding: EdgeInsets.only(
                                           top: 15.h, bottom: 3.h),
-                                      child: Badge(
+                                      child: badges.Badge(
                                         badgeContent: const Text(
                                           "!",
                                           style: TextStyle(color: Colors.white),
                                         ),
-                                        badgeColor: CommonColor.blue,
+                                        badgeStyle: badges.BadgeStyle(
+                                            badgeColor: CommonColor.blue),
                                         child: InkWell(
                                             onTap: () {
                                               pressed.bsmispressed
@@ -372,12 +373,13 @@ class _RankState extends State<Rank> {
                                   : Padding(
                                       padding: EdgeInsets.only(
                                           top: 15.h, bottom: 3.h),
-                                      child: Badge(
+                                      child: badges.Badge(
                                         badgeContent: const Text(
                                           "!",
                                           style: TextStyle(color: Colors.white),
                                         ),
-                                        badgeColor: CommonColor.blue,
+                                        badgeStyle: badges.BadgeStyle(
+                                            badgeColor: CommonColor.blue),
                                         child: InkWell(
                                           onTap: () {
                                             pressed.bsmispressed
