@@ -422,7 +422,7 @@ List<Widget> makeRankList(BuildContext context, List<BaekjoonRanklist> ranks) {
   }
 
   for (var i = 3; i < ranks.length; i++) {
-    results.add(Padding(
+    results.add( Padding(
       padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 13.h),
       child: Container(
         width: double.infinity,
